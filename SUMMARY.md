@@ -25,3 +25,4 @@
 * [Element Examples](element-examples.md)
 * [Template Processor](template-processor.md)
 * [Changelog](changelog.md)
+* [Item Grids and Slots](item-grids-and-slots.md)
