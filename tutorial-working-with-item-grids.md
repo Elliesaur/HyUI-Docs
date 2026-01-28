@@ -78,6 +78,80 @@ page.addEventListener("salvage-grid", CustomUIEventBindingType.Dropped, DroppedE
 page.open(store);
 ```
 {% endstep %}
+
+{% step %}
+### Update, Remove and Read Slots
+
+Once the grid has slots, you can update, remove, or query them by index (zero-based). `getSlots()` returns an unmodifiable snapshot, so use `updateSlot(...)` or `removeSlot(...)` to mutate the grid.
+
+```java
+page.getById("salvage-grid", ItemGridBuilder.class).ifPresent(grid -> {
+    ItemGridSlot replacement = new ItemGridSlot(new ItemStack("Soil_Dirt_Tilled", 8));
+    grid.updateSlot(replacement, 1); // update slot at index 1
+
+    grid.removeSlot(2); // remove slot at index 2
+
+    ItemGridSlot firstSlot = grid.getSlot(0);
+    List<ItemGridSlot> currentSlots = grid.getSlots();
+});
+```
+
+```java
+PageBuilder page = PageBuilder.pageForPlayer(playerRef)
+    .fromHtml(html);
+
+page.addEventListener("salvage-grid", CustomUIEventBindingType.SlotClicking, SlotClickingEventData.class, (slot, ctx) -> {
+        Integer index = slot.getSlotIndex();
+        ctx.getById("summary", LabelBuilder.class).ifPresent(label -> {
+            label.withText("Clicked slot index: " + index);
+        });
+        ctx.updatePage(false);
+    });
+
+page.open(store);
+```
+
+
+{% endstep %}
+
+{% step %}
+### Drag and Drop - Properly Implemented
+
+When a drop happens, you can grab the `ItemGridBuilder` and update slots in-place. The example below moves the source slot to the destination and clears the source. It also shows how to update a slot's quantity.
+
+```java
+page.addEventListener("salvage-grid", CustomUIEventBindingType.Dropped, DroppedEventData.class, (drop, ctx) -> {
+    ctx.getById("salvage-grid", ItemGridBuilder.class).ifPresent(grid -> {
+        Integer sourceIndex = drop.SourceSlotId();
+        Integer targetIndex = drop.getSlotIndex();
+
+        if (sourceIndex == null || targetIndex == null) {
+            return;
+        }
+
+        ItemGridSlot sourceSlot = grid.getSlot(sourceIndex);
+        if (sourceSlot == null) {
+            return;
+        }
+
+        // Example: move the dragged slot to the drop target.
+        grid.updateSlot(sourceSlot, targetIndex);
+        grid.updateSlot(new ItemGridSlot(), sourceIndex);
+
+        // Example: adjust quantity on the target slot after the move.
+        ItemGridSlot updatedTarget = new ItemGridSlot(new ItemStack(
+                drop.getItemStackId(),
+                Math.max(1, drop.getItemStackQuantity() - 1)
+        ));
+        grid.updateSlot(updatedTarget, targetIndex);
+    });
+
+    ctx.updatePage(false);
+});
+```
+
+
+{% endstep %}
 {% endstepper %}
 
 {% hint style="info" %}
