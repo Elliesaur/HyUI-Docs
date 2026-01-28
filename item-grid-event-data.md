@@ -1,8 +1,8 @@
-# Item Grids and Slots
+# Item Grid Event Data
 
-Below is a list of the event payloads passed to event listeners for particular events associated with Item Grids and Slots.
+Below is a list of the event payloads passed to event listeners for particular events associated with Item Grids. These are useful to know which item is being dragged, from where it came and where it is going.
 
-This page documents the event data classes used for item-grid and item-slot events. Each payload is only passed to listeners registered for the matching `CustomUIEventBindingType` value.
+This page documents the event data classes used for item grids. Each payload is only passed to listeners registered for the matching `CustomUIEventBindingType` value.
 
 ### Mapping: Event Type -> Payload
 
