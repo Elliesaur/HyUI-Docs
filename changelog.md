@@ -2,6 +2,16 @@
 
 <details>
 
+<summary><strong>0.5.7 - 29 Jan 2026</strong></summary>
+
+* Add events for ItemGrid. See tutorial: [here](tutorial-working-with-item-grids.md).
+* Add Multi-Line Text Field (textarea).
+* Ensure store in HUDs is always called with a 'fresh' store. This means there is no need to pass a store to a HUD on creation, or opening. These are marked as deprecated. Thanks to Willem for this!
+
+</details>
+
+<details>
+
 <summary><strong>0.5.6 - 28 Jan 2026</strong></summary>
 
 * Fix button text not being set.

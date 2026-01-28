@@ -50,6 +50,7 @@ PageBuilder.pageForPlayer(playerRef)
 | `<select>`                          | `DropdownBoxBuilder`   | Dropdown selection lists. Use `<option>` children for entries.                                                                                                                                                                                                               |
 | `<sprite>`                          | `SpriteBuilder`        | Displays an animated sprite.                                                                                                                                                                                                                                                 |
 | `<nav class="tabs">`                | `TabNavigationBuilder` | Tab navigation bar.                                                                                                                                                                                                                                                          |
+| `<textarea>`                        | `TextFieldBuilder`     | Multiline text input. Maps to `TextFieldBuilder.multilineTextField()`. Supports `rows` for max visible lines and `data-hyui-*` attributes for multiline properties.                                                                                                          |
 
 ## Attributes
 
@@ -114,6 +115,12 @@ HYUIML supports several standard and custom attributes:
 * `data-hyui-disabled-bg`: Custom button background style for the disabled state.
 * `data-hyui-disabled`: Disables a button (including custom buttons).
 * `data-hyui-overscroll`: Enables overscroll handling for buttons (including custom buttons).
+* `data-hyui-max-visible-lines`: Specific to `<textarea>`, overrides the max visible lines.
+* `data-hyui-auto-grow`: Specific to `<textarea>`, enables multiline auto-grow.
+* `data-hyui-scrollbar-style`: Specific to `<textarea>`, sets the scrollbar style reference (`"Common.ui" "DefaultScrollbarStyle"`).
+* `data-hyui-background`: Specific to `<textarea>`, sets the background reference (`"Common.ui" "InputBoxBackground"`).
+* `data-hyui-placeholder-style`: Specific to `<textarea>`, sets the placeholder style reference (`"Common.ui" "DefaultInputFieldPlaceholderStyle"`).
+* `data-hyui-content-padding`: Specific to `<textarea>`, sets content padding (`(Horizontal:10,Vertical:8)`).
 
 ## Styling with CSS
 
@@ -158,7 +165,7 @@ Supported CSS Properties:
 * `background-image`: URL to an image (e.g., `url('lizard.png')` or `lizard.png`) with optional border values: `background-image: url('lizard.png') 4 6` (horizontal, vertical) or `background-image: url('lizard.png') 4` (border).
 * `background-color`: Hex color (e.g., `#ff0000` or `#ff0000(0.5)`) or `rgb(...)`/`rgba(...)` (converted to hex). Supports optional border values: `background-color: #ff0000 4 6` (horizontal, vertical) or `background-color: rgba(255, 0, 0, 0.5) 4` (border).
 
-CSS Units
+#### CSS Units
 
 HYUIML strips CSS units from numeric values (e.g., `px`, `rem`, `em`, `%`) because unit conversion is not supported. Values are treated as raw numbers, so prefer plain numeric values (e.g., `font-size: 16;` instead of `font-size: 16px;`).
 
