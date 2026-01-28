@@ -9,6 +9,7 @@
   * [Opening a Page](tutorial-page-building/opening-a-page.md)
   * [Identifying Elements](tutorial-page-building/identifying-elements.md)
   * [Page Interactions](tutorial-page-building/page-interactions.md)
+* [Tutorial: Working with Item Grids](tutorial-working-with-item-grids.md)
 * [Tutorial: Advanced Page Building](tutorial-advanced-page-building/README.md)
   * [Runtime Editing](tutorial-advanced-page-building/runtime-editing.md)
   * [Layout Modes](tutorial-advanced-page-building/layout-modes.md)
