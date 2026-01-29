@@ -8,4 +8,4 @@ In this tutorial, we will cover more advanced page building:
 
 [add-bounty-child-at-runtime.md](add-bounty-child-at-runtime.md "mention")
 
-[template-processor.md](../../home/template-processor.md "mention")
+[template-processor.md](../template-processor.md "mention")

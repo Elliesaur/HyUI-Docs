@@ -1,4 +1,4 @@
-# Page Building
+# Tutorial: Page Building
 
 Pages in HyUI are full-screen user interfaces that typically handle player interaction while the game is paused or the cursor is active. Pages are managed via the `PageBuilder`.
 

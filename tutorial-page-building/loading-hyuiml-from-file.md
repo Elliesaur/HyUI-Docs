@@ -17,11 +17,7 @@ Once you have loaded your HYUIML from file, you can use the various builder meth
 
 Create a "Pages" folder within your Common/UI/Custom directory of your plugin.&#x20;
 
-
-
 Within that folder, create a new HTML file, give it the name "MyPage.html"
-
-
 
 Add in the following content to it:
 

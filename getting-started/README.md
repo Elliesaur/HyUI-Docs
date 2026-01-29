@@ -6,7 +6,7 @@ What would you like to do?
 
 * [**Install HyUI**](installation.md): Set up HyUI in your Hytale project.
 * [**Build a HUD**](hud-building.md): Create persistent on-screen elements like maps, health bars, or notifications.
-* [**Build a Page**](../../tutorials/tutorial-page-building/): Create full-screen interactive menus and settings pages.
+* [**Build a Page**](../tutorial-page-building/): Create full-screen interactive menus and settings pages.
 * [**Use HYUIML (HTML/CSS)**](../hyuiml-htmlish-in-hytale.md): Learn how to define your UIs using a familiar markup syntax.
 * [**Template Processor**](../template-processor.md): Reusable HYUIML components and variables.
 * [**UI Elements**](../element-examples.md): Common UI element examples and patterns.
