@@ -2,6 +2,17 @@
 
 <details>
 
+<summary><strong>0.5.9 - 30 Jan 2026</strong></summary>
+
+* Fix tab navigation builder not supporting template runtime interactions.
+* Add scrollbar style support for divs, same way as the textarea.
+* Add sub-components to Template Processor.
+* Add "hot-reload" of HYUIML (html) from project resources. This assumes one of the candidate paths exists (`src/main/resources`, `build/resources/main`, `../src/main/resources`, or `../build/resources/main`).
+
+</details>
+
+<details>
+
 <summary><strong>0.5.8 - 29 Jan 2026</strong></summary>
 
 * Rework internally how logging occurs, it is now enabled in releases, at Finest level only.

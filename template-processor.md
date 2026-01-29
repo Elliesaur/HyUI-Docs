@@ -160,6 +160,34 @@ Model support:
 * Lists/arrays via index (`{{$items.0.name}}`).
 {% endhint %}
 
+**Nested Components With TemplateProcessor**
+
+You can compose components inside other components using the same `TemplateProcessor` instance. This can be nested up to 20 times.
+
+```java
+String html = new TemplateProcessor()
+    .registerComponent("mySubComponent",
+        """
+        <p>Hello subComponent!</p>
+        """)
+    .registerComponent("myComponent",
+        """
+        <div>
+            {{@mySubComponent}}
+        </div>
+        """)
+    .process("""
+        <div class="container">
+            {{@myComponent}}
+        </div>
+        """);
+
+PageBuilder.detachedPage()
+    .withLifetime(CustomPageLifetime.CanDismiss)
+    .fromHtml(html)
+    .open(playerRef);
+```
+
 ## How the Showcase Uses It
 
 In `HyUIShowcaseCommand`, the `TemplateProcessor` is used to:
