@@ -8,7 +8,9 @@ We will:
 * Keep the default button builders intact.
 * Use style references from UI documents.
 
-## Part 1: Builder Styles
+
+
+
 
 {% code title="TabsStyling.java" %}
 ```java

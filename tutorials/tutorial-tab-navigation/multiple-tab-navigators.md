@@ -8,7 +8,7 @@ We will:
 * Link content to a specific navigation ID.
 * Avoid tab ID collisions across navs.
 
-## Part 1: HYUIML with Multiple Navigations
+## HYUIML with Multiple Navigations
 
 {% tabs %}
 {% tab title="HYUIML (HTML)" %}

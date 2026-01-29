@@ -10,7 +10,7 @@ We will:
 
 {% stepper %}
 {% step %}
-### Part 1: Base HYUIML
+### Base HYUIML
 
 {% code title="base.html" %}
 ```html
@@ -43,7 +43,7 @@ We will:
 {% endstep %}
 
 {% step %}
-### Part 2: Update a Tab (Label + Button Builder)
+### Update a Tab (Label + Button Builder)
 
 <pre class="language-java" data-title="update-tab.java"><code class="lang-java">PageBuilder page = PageBuilder.pageForPlayer(playerRef)
     .fromHtml(html);
