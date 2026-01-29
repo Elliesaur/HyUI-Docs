@@ -2,9 +2,21 @@
 
 <details>
 
+<summary><strong>0.5.8 - 29 Jan 2026</strong></summary>
+
+* Rework internally how logging occurs, it is now enabled in releases, at Finest level only.
+* Add helper methods to ItemGridBuilder to update/remove/get all slots, the tutorial has also been updated to showcase this.
+* Add support for replacing button builders for tab navigation - this complements the existing selected/unselected styling. Use `TabNavigationBuilder.addTab(id, label, contentId, buttonBuilder)` , this means every tab's button can have its own builder. By default, tabs are built with secondary/primary button builders. You can of course update/remove tabs as well.
+* Add support for `CustomButtonBuilder` for tab navigation.
+* Add tutorial for Tab Navigation.
+
+</details>
+
+<details>
+
 <summary><strong>0.5.7 - 29 Jan 2026</strong></summary>
 
-* Add events for ItemGrid. See tutorial: [here](tutorial-working-with-item-grids.md).
+* Add events for ItemGrid. See tutorial: [here](../tutorials/tutorial-working-with-item-grids.md).
 * Add Multi-Line Text Field (textarea).
 * Ensure store in HUDs is always called with a 'fresh' store. This means there is no need to pass a store to a HUD on creation, or opening. These are marked as deprecated. Thanks to Willem for this!
 

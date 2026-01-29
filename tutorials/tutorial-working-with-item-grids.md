@@ -160,7 +160,7 @@ Notes:
 * `SlotClickingEventData` is only passed to `CustomUIEventBindingType.SlotClicking` listeners.
 * `DroppedEventData` is only passed to `CustomUIEventBindingType.Dropped` listeners.
 * The grid uses `data-hyui-are-items-draggable="true"` so drag events will fire.
-* See a complete list of concrete event data types and their events [here](item-grid-event-data.md).
+* See a complete list of concrete event data types and their events [here](../home/item-grid-event-data.md).
 {% endhint %}
 
 [^1]: This creates an empty slot.

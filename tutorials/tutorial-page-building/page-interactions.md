@@ -65,7 +65,7 @@ This is how we add a basic button interaction. There are different events, most 
 
 ### Builder Mappings
 
-One last thing, how did we know it would be a label builder? Check out the complete reference for HYUIML [here](../../hyuiml-htmlish-in-hytale.md#supported-tags-and-mappings) and read how each tag is converted to builders.&#x20;
+One last thing, how did we know it would be a label builder? Check out the complete reference for HYUIML [here](../../home/hyuiml-htmlish-in-hytale.md#supported-tags-and-mappings) and read how each tag is converted to builders.&#x20;
 
 
 
