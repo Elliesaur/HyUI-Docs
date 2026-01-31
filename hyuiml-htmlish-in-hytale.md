@@ -136,7 +136,7 @@ You can include a `<style>` block at the beginning of your HYUIML:
         flex-weight: 1;
     }
 </style>
-<div class="header">Title</div>
+<p class="header">Title</p>
 <button id="my-button">Click Me</button>
 ```
 
