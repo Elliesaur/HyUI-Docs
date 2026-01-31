@@ -2,6 +2,25 @@
 
 <details>
 
+<summary><strong>0.5.11 - 31 Jan 2026</strong></summary>
+
+* Fixed layout mode being applied to buttons and not group surrounding button.
+* Refactor: use supplier instead of direct value - thank you @Farrael!
+* Feature: Allow negative anchors - thank you @WolverinDEV!
+* Changed from ARR to LGPLv3 license.
+
+</details>
+
+<details>
+
+<summary><strong>0.5.10 - 30 Jan 2026</strong></summary>
+
+* Fix field access checks.
+
+</details>
+
+<details>
+
 <summary><strong>0.5.9 - 30 Jan 2026</strong></summary>
 
 * Fix tab navigation builder not supporting template runtime interactions.
