@@ -9,12 +9,16 @@ Use `{{$variable}}` in HYUIML and set values in Java:
 ```java
 TemplateProcessor template = new TemplateProcessor()
     .setVariable("playerName", playerRef.getUsername())
-    .setVariable("playerLevel", 42);
+    .setVariable("playerLevel", 42)
+    .setVariable("uuid", () -> {
+      store.getComponent(ref, UUIDComponent.getComponentType()).getUuid()
+    });
 ```
 
 ```html
 <p>Player: {{$playerName}}</p>
 <p>Level: {{$playerLevel}}</p>
+<p>UUID: {{$uuid}}</p>
 ```
 
 Defaults and filters are supported:
@@ -31,6 +35,14 @@ Dot paths are supported for nested data:
 <p>Tier: {{$meta.tier}}</p>
 <p>First item name: {{$items.0.name}}</p>
 ```
+
+{% hint style="info" %}
+Notes on `Supplier` usage:
+
+* Variables are now resolved **lazily** and only evaluated when actually used in the template.
+  This means that variables inside conditional blocks (e.g., `#if`) may **never be evaluated** if the condition failed.  
+* You can leverage this behavior to compute **expensive or heavy values** only when they are needed, improving performance.
+{% endhint %}
 
 ## Each Loops
 
