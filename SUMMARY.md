@@ -7,6 +7,7 @@
 * [Getting Started](getting-started/README.md)
   * [Installation](getting-started/installation.md)
   * [HUD Building](getting-started/hud-building.md)
+* [Dynamic Images](home/dynamic-images.md)
 * [Item Grid Event Data](item-grid-event-data.md)
 * [HYUIML - HTMLish in Hytale](hyuiml-htmlish-in-hytale.md)
 * [Element Validation](element-validation.md)
