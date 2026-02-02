@@ -2,6 +2,16 @@
 
 <details>
 
+<summary><strong>0.6.1 - 3 Feb 2026</strong></summary>
+
+* Add getter for template processor on the UI context.
+* Add "margin" aliases for anchor-\*.
+* Remove clip children.
+
+</details>
+
+<details>
+
 <summary><strong>0.6.0 - 1 Feb 2026</strong></summary>
 
 * Add per-player image caching - see the [docs](home/dynamic-images.md) for more info.
