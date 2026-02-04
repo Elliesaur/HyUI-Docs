@@ -78,7 +78,7 @@ HYUIML supports several standard and custom attributes:
 * `data-hyui-direction`: Progress bar fill direction (`start` or `end`).
 * `data-hyui-alignment`: Progress bar orientation (`horizontal` or `vertical`).
 * `data-hyui-mask-texture-path`: Circular progress bar mask texture path.
-* `data-hyui-color`: Progress bar fill color (hex).
+* `data-hyui-color`: Circular progress bar tint color (hex).
 * `data-hyui-allowunselection`: Specific to `<select>`, allows deselecting items.
 * `data-hyui-maxselection`: Specific to `<select>`, number of maximum selectable items.
 * `data-hyui-entryheight`: Specific to `<select>`, height of each dropdown entry.
