@@ -5,8 +5,9 @@
 <summary><strong>0.7.0 - 5 Feb 2026</strong></summary>
 
 * Rework styles and how they are applied. Please see the documentation on HYUIML (major update).
-* Add Hywind support, thanks to @kelpycode.
-* Add page dismissal listener.
+* Add Hywind support, thanks to @kelpycode. You can now add the style through the new `.fromHtml(..., UIType.HYWIND)` overload on Page/Hud builders.
+* Add page dismissal/close listener.
+* Fix: anchor null on height for NumberFieldBuilder.
 
 </details>
 
