@@ -2,10 +2,11 @@
 
 <details>
 
-<summary><strong>0.6.2 - 5 Feb 2026</strong></summary>
+<summary><strong>0.7.0 - 5 Feb 2026</strong></summary>
 
 * Rework styles and how they are applied. Please see the documentation on HYUIML (major update).
 * Add Hywind support, thanks to @kelpycodes.
+* Add page dismissal listener.
 
 </details>
 
