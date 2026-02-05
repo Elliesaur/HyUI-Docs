@@ -10,12 +10,20 @@
 * [Dynamic Images](home/dynamic-images.md)
 * [Item Grid Event Data](item-grid-event-data.md)
 * [HYUIML - HTMLish in Hytale](hyuiml-htmlish-in-hytale.md)
+  * [HYUIML - CSS](hyuiml-css.md)
+  * [HYUIML - Elements](hyuiml-elements.md)
+  * [HYUIML - Limitations](hyuiml-limitations.md)
 * [Element Validation](element-validation.md)
 * [Element Examples](element-examples.md)
 * [Template Processor](template-processor.md)
 
 ## Tutorials
 
+* [Tutorial: Styling with Builders](tutorial-styling-with-builders/README.md)
+  * [Basic Styling](tutorial-styling-with-builders/basic-styling.md)
+  * [Style Classes Deep Dive](tutorial-styling-with-builders/style-classes-deep-dive.md)
+  * [Custom Styles](tutorial-styling-with-builders/custom-styles.md)
+  * [Best Practices](tutorial-styling-with-builders/best-practices.md)
 * [Tutorial: Page Building](tutorial-page-building/README.md)
   * [Loading HYUIML From File](tutorial-page-building/loading-hyuiml-from-file.md)
   * [Opening a Page](tutorial-page-building/opening-a-page.md)
