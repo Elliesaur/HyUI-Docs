@@ -1,10 +1,19 @@
 # HYUIML - HTMLish in Hytale
 
-HYUIML is an HTML-like markup language for defining Hytale UIs using a familiar syntax. It is parsed by HyUI and converted into the fluent builder API calls under the hood.
+HYUIML is an HTML-like markup language for defining Hytale UIs using a familiar syntax. It is parsed by HyUI and converted into fluent builder API calls under the hood.
 
-## Basic Usage
+## Overview
 
-You can load HYUIML directly into a `PageBuilder`:
+HYUIML provides a declarative way to build UIs that feels familiar to web developers, while mapping directly to Hytale's UI system. It supports:
+
+- HTML-like tags for common UI elements
+- CSS-style styling (with limitations)
+- A "flexbox-ish" layout system that approximates modern web layouts
+- Custom attributes for Hytale-specific features
+
+**Important**: HYUIML is not a full HTML/CSS engine. It's a lightweight syntax that maps to Hytale's UI primitives with some default styling and layout conveniences.
+
+## Quick Start
 
 ```java
 String html = """
@@ -21,227 +30,95 @@ PageBuilder.pageForPlayer(playerRef)
     .open(store);
 ```
 
-## Supported Tags and Mappings
+## Documentation Structure
 
-| HTML Tag                            | HyUI Builder           | Notes                                                                                                                                                                                                                                                                        |
-| ----------------------------------- | ---------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `<div>`                             | `GroupBuilder`         | Use for layout and containers.                                                                                                                                                                                                                                               |
-| `<div class="tab-content">`         | `TabContentBuilder`    | Tab content container linked to a tab ID.                                                                                                                                                                                                                                    |
-| `<div class="decorated-container">` | `ContainerBuilder`     | Uses the decorated container UI file for a styled frame.                                                                                                                                                                                                                     |
-| `<div class="container">`           | `ContainerBuilder`     | Uses the container UI file for a frame with minimal style.                                                                                                                                                                                                                   |
-| `<p>`                               | `LabelBuilder`         | Standard text labels.                                                                                                                                                                                                                                                        |
-| `<label>`                           | `LabelBuilder`         | Similar to `<p>`, often used for form field descriptions.                                                                                                                                                                                                                    |
-| `<button>`                          | `ButtonBuilder`        | Standard buttons. Use `class="back-button"`, `class="secondary-button"`, `class="small-secondary-button"`, `class="small-tertiary-button"`, or `class="tertiary-button"` for themed variants. Use `class="custom-textbutton"` or `class="custom-button"` for custom buttons. |
-| `<input type="text">`               | `TextFieldBuilder`     | Text input fields. Requires a `value` to set to track values on events.                                                                                                                                                                                                      |
-| `<input type="password">`           | `TextFieldBuilder`     | Masked password input fields. Requires a `value` to set to track values on events.                                                                                                                                                                                           |
-| `<input type="number">`             | `NumberFieldBuilder`   | Numeric input fields. Requires a `value` to set to track values on events.                                                                                                                                                                                                   |
-| `<input type="range">`              | `SliderBuilder`        | Sliders. Requires a `value` to set to track values on events.                                                                                                                                                                                                                |
-| `<input type="checkbox">`           | `CheckBoxBuilder`      | Toggle switches.                                                                                                                                                                                                                                                             |
-| `<input type="color">`              | `ColorPickerBuilder`   | Color selectors.                                                                                                                                                                                                                                                             |
-| `<input type="reset">`              | `ButtonBuilder`        | Specifically creates a `CancelTextButton`.                                                                                                                                                                                                                                   |
-| `<progress>`                        | `ProgressBarBuilder`   | Displays a progress bar. Add `class="circular-progress"` to render a CircularProgressBar.                                                                                                                                                                                    |
-| `<span class="item-icon">`          | `ItemIconBuilder`      | Displays an item icon. Use `data-hyui-item-id` for the item icon.                                                                                                                                                                                                            |
-| `<span class="item-slot">`          | `ItemSlotBuilder`      | Displays a full item slot. Use `data-hyui-item-id` for the item.                                                                                                                                                                                                             |
-| `<div class="item-grid">`           | `ItemGridBuilder`      | Displays an item grid container.                                                                                                                                                                                                                                             |
-| `<div class="item-grid-slot">`      | `ItemGridSlot`         | Adds a slot entry inside an item grid.                                                                                                                                                                                                                                       |
-| `<img>`                             | `ImageBuilder`         | Displays an image. Use `src` for the path.                                                                                                                                                                                                                                   |
-| `<img class="dynamic-image">`       | `DynamicImageBuilder`  | Downloads and streams a PNG at runtime (see Dynamic Images).                                                                                                                                                                                                                 |
-| `<hyvatar>`                         | `HyvatarImageBuilder`  | Renders a Hyvatar avatar (head/full/cape) as a dynamic image.                                                                                                                                                                                                                |
-| `<select>`                          | `DropdownBoxBuilder`   | Dropdown selection lists. Use `<option>` children for entries.                                                                                                                                                                                                               |
-| `<sprite>`                          | `SpriteBuilder`        | Displays an animated sprite.                                                                                                                                                                                                                                                 |
-| `<nav class="tabs">`                | `TabNavigationBuilder` | Tab navigation bar.                                                                                                                                                                                                                                                          |
-| `<textarea>`                        | `TextFieldBuilder`     | Multiline text input. Maps to `TextFieldBuilder.multilineTextField()`. Supports `rows` for max visible lines and `data-hyui-*` attributes for multiline properties.                                                                                                          |
+- **[CSS Styling](hyuiml-css.md)** - CSS properties, units, and styling system
+- **[Elements Reference](hyuiml-elements.md)** - Complete element and attribute reference
+- **[Limitations & Gotchas](hyuiml-limitations.md)** - Important constraints and differences from HTML/CSS
 
-## Attributes
+## Core Concepts
 
-HYUIML supports several standard and custom attributes:
+### Layout System: "Flexbox-ish"
 
-* `id`: Sets the element ID (accessible via `PageBuilder.getById` and for event listeners).
-* `class`: Used for CSS styling.
-* `value`: Sets the initial value for input elements.
-* `min`, `max`, `step`: Specific to sliders (`input type="range"`).
-* `checked`: Specific to checkboxes (`true` or `false`).
-* `format`: Number format string for `<input type="number">`.
-* `placeholder`: Hint text for text/password inputs.
-* `maxlength`: Maximum character limit for text/password inputs.
-* `readonly`: Makes text/password inputs read-only (`true` or `false`).
-* `width`, `height`: Specific to `<img>` tag, maps to `anchor-width` and `anchor-height`.
-* `data-hyui-title`: Specific to containers/overlays to set the header title.
-* `data-hyui-tooltiptext`: Adds a tooltip to the element.
-* `data-hyui-item-id`: In-game item ID for the icon to reflect.
-* `data-hyui-show-quality-background`: Specific to `<span class="item-slot">`, toggles item quality background.
-* `data-hyui-show-quantity`: Specific to `<span class="item-slot">`, toggles the item quantity display.
-* `data-hyui-max-decimal-places`: Specific to `<input type="number">`, sets the maximum decimal places.
-* `data-hyui-bar-texture-path`: Path to the progress bar's fill texture.
-* `data-hyui-effect-texture-path`: Path to the progress bar's effect texture.
-* `data-hyui-effect-width`, `data-hyui-effect-height`, `data-hyui-effect-offset`: Customizes the progress bar's effect appearance.
-* `data-hyui-direction`: Progress bar fill direction (`start` or `end`).
-* `data-hyui-alignment`: Progress bar orientation (`horizontal` or `vertical`).
-* `data-hyui-mask-texture-path`: Circular progress bar mask texture path.
-* `data-hyui-color`: Circular progress bar tint color (hex).
-* `data-hyui-allowunselection`: Specific to `<select>`, allows deselecting items.
-* `data-hyui-maxselection`: Specific to `<select>`, number of maximum selectable items.
-* `data-hyui-entryheight`: Specific to `<select>`, height of each dropdown entry.
-* `data-hyui-showlabel`: Specific to `<select>`, boolean to show or hide the label.
-* `data-hyui-frame-width`, `data-hyui-frame-height`, `data-hyui-frame-per-row`, `data-hyui-frame-count`: Specific to `<sprite>`, defines the sprite animation frames.
-* `data-hyui-fps`: Specific to `<sprite>`, sets the animation speed.
-* `data-hyui-background-mode`: Specific to `<div class="item-grid">`, sets the background mode.
-* `data-hyui-render-item-quality-background`: Specific to `<div class="item-grid">`, toggles item quality background rendering.
-* `data-hyui-are-items-draggable`: Specific to `<div class="item-grid">`, toggles item drag behavior.
-* `data-hyui-keep-scroll-position`: Specific to `<div class="item-grid">`, keeps scroll position.
-* `data-hyui-show-scrollbar`: Specific to `<div class="item-grid">`, toggles the scrollbar.
-* `data-hyui-slots-per-row`: Specific to `<div class="item-grid">`, sets slots per row.
-* `data-hyui-name`: Specific to `<div class="item-grid-slot">`, sets the slot label.
-* `data-hyui-description`: Specific to `<div class="item-grid-slot">`, sets the slot description.
-* `data-hyui-item-incompatible`: Specific to `<div class="item-grid-slot">`, toggles item incompatibility.
-* `data-hyui-item-uncraftable`: Specific to `<div class="item-grid-slot">`, toggles item uncraftable state.
-* `data-hyui-activatable`: Specific to `<div class="item-grid-slot">`, toggles slot activation.
-* `data-hyui-skip-item-quality-background`: Specific to `<div class="item-grid-slot">`, skips item quality background.
-* `data-hyui-slot-background`: Specific to `<div class="item-grid-slot">`, patch style reference for slot background.
-* `data-hyui-slot-overlay`: Specific to `<div class="item-grid-slot">`, patch style reference for slot overlay.
-* `data-hyui-slot-icon`: Specific to `<div class="item-grid-slot">`, patch style reference for slot icon.
-* `data-tabs`: Specific to `<nav class="tabs">`, defines tabs in `tabId:Label` or `tabId:Label:contentId` format.
-* `data-selected`: Specific to `<nav class="tabs">`, initial selected tab ID.
-* `data-tab-content`: Specific to `<button>` or `<a>` inside a tab nav, links a tab to a content ID.
-* `data-hyui-tab-id`: Specific to `<div class="tab-content">`, links this content block to a tab ID.
-* `data-hyui-tab-nav`: Optional for `<div class="tab-content">`, restricts it to a specific tab nav ID.
-* `data-hyui-default-label-style`: Custom text button label style for the default state (see Custom Buttons).
-* `data-hyui-hovered-label-style`: Custom text button label style for the hovered state.
-* `data-hyui-pressed-label-style`: Custom text button label style for the pressed state.
-* `data-hyui-disabled-label-style`: Custom text button label style for the disabled state.
-* `data-hyui-default-bg`: Custom button background style for the default state (see Custom Buttons).
-* `data-hyui-hovered-bg`: Custom button background style for the hovered state.
-* `data-hyui-pressed-bg`: Custom button background style for the pressed state.
-* `data-hyui-disabled-bg`: Custom button background style for the disabled state.
-* `data-hyui-disabled`: Disables a button (including custom buttons).
-* `data-hyui-overscroll`: Enables overscroll handling for buttons (including custom buttons).
-* `data-hyui-max-visible-lines`: Specific to `<textarea>`, overrides the max visible lines.
-* `data-hyui-auto-grow`: Specific to `<textarea>`, enables multiline auto-grow.
-* `data-hyui-scrollbar-style`: Specific to `<textarea>`, sets the scrollbar style reference (`"Common.ui" "DefaultScrollbarStyle"`).
-* `data-hyui-background`: Specific to `<textarea>`, sets the background reference (`"Common.ui" "InputBoxBackground"`).
-* `data-hyui-placeholder-style`: Specific to `<textarea>`, sets the placeholder style reference (`"Common.ui" "DefaultInputFieldPlaceholderStyle"`).
-* `data-hyui-content-padding`: Specific to `<textarea>`, sets content padding (`(Horizontal:10,Vertical:8)`).
+HYUIML uses Hytale's `LayoutMode` system, which provides a simplified flexbox-like behavior. Unlike true CSS flexbox:
 
-## Styling with CSS
+- Elements are laid out using `LayoutMode` (Top, Bottom, Left, Right, Center, etc.)
+- `flex-weight` controls how elements grow to fill space
+- CSS flexbox properties (`flex-direction`, `justify-content`, `align-items`) are mapped to Hytale's system where possible
+- Not all flexbox features are supported (no flex-wrap, flex-basis, etc.)
 
-You can include a `<style>` block at the beginning of your HYUIML:
+**From v0.5.0**: `flex-weight` applies to the wrapping group for non-Group/Label elements, which affects layout behavior.
 
-```html
-<style>
-    .header {
-        color: #ff0000;
-        font-weight: bold;
-    }
-    #my-button {
-        flex-weight: 1;
-    }
-</style>
-<p class="header">Title</p>
-<button id="my-button">Click Me</button>
+### Default Styles
+
+Some elements have default styles applied when using the `default-style` class or `data-hyui-default-style` attribute:
+
+- `<label>` / `<p>` - Default label styling from Hytale
+- `<input>` fields - Default input field styling
+- Sliders - Default slider appearance
+- Checkboxes - Default checkbox styling
+- Color pickers - Default color picker styling
+
+These defaults can be overridden with CSS or style attributes.
+
+### Event Handling
+
+Elements require IDs to attach event listeners:
+
+```java
+builder.addEventListener("my-button", CustomUIEventBindingType.Activating, (ignored, ctx) -> {
+    playerRef.sendMessage(Message.raw("Button clicked!"));
+});
 ```
 
-Supported CSS Properties:
+**Note**: IDs are sanitized internally (e.g., `my-button` becomes `HYUUIDmybutton0`). Always use your original ID when referencing elements.
 
-* `color`: Hex colors (e.g., `#FFFFFF`).
-* `font-size`: Numeric value.
-* `font-weight`: `bold` or `normal`.
-* `text-transform`: `uppercase` or `none`.
-* `hyui-style-reference`: Applies a style reference from a UI document (e.g., `hyui-style-reference: "Common.ui" "DefaultLabelStyle"`). Note that if this is used, other styling properties in the same block may be ignored.
-* `hyui-entry-label-style`: Style reference for dropdown entry labels.
-* `hyui-selected-entry-label-style`: Style reference for the selected dropdown entry label.
-* `hyui-popup-style`: Style reference for the dropdown popup menu.
-* `hyui-number-field-style`: Style reference for the number field.
-* `hyui-checked-style`: Style reference for checkboxes when checked.
-* `hyui-unchecked-style`: Style reference for checkboxes when unchecked.
-* `text-align`: `top`, `bottom`, `left`, `right`, `center`, `topscrolling`, `bottomscrolling`, `middlecenter`, `centermiddle`, `leftcenterwrap`, `rightcenterwrap`, `full`, `middle`, `middlecenter`. (Note: Maps to `LayoutMode` for `<div>`).
-* `layout-mode`, `layout`: Alternative names for `text-align` specifically for setting the `LayoutMode` on a `<div>`.
-* `vertical-align`: `top`, `bottom`, `center`.
-* `horizontal-align`: `left`, `right`, `center`.
-* `align`: Combines horizontal and vertical alignment (e.g., `center`).
-* `visibility`: `hidden` or `shown` (directly translates to `withVisible(bool)`).
-* `display`: `none` or `block` (alternative to `visibility`, also translates to `withVisible(bool)`).
-* `flex-weight`: Numeric weight for layout. From v0.5.0 onwards, this applies to the wrapping group (all elements except `Group` and `Label`), which can change layout behavior vs earlier versions.
-* `anchor-*`: Maps to Hytale anchors (e.g., `anchor-left`, `anchor-top`, `anchor-width`, `anchor-height`).
-* `background-image`: URL to an image (e.g., `url('lizard.png')` or `lizard.png`) with optional border values: `background-image: url('lizard.png') 4 6` (horizontal, vertical) or `background-image: url('lizard.png') 4` (border).
-* `background-color`: Hex color (e.g., `#ff0000` or `#ff0000(0.5)`) or `rgb(...)`/`rgba(...)` (converted to hex). Supports optional border values: `background-color: #ff0000 4 6` (horizontal, vertical) or `background-color: rgba(255, 0, 0, 0.5) 4` (border).
+## Quick Reference
 
-#### CSS Units
+For complete details, see the linked documentation pages:
 
-HYUIML strips CSS units from numeric values (e.g., `px`, `rem`, `em`, `%`) because unit conversion is not supported. Values are treated as raw numbers, so prefer plain numeric values (e.g., `font-size: 16;` instead of `font-size: 16px;`).
+### Common Elements
 
-## Custom Buttons
+- `<div>` - Layout container (GroupBuilder)
+- `<div class="page-overlay">` - Full-screen overlay
+- `<div class="container">` - Framed container with title
+- `<div class="panel">` - Panel container
+- `<p>` / `<label>` - Text labels
+- `<button>` - Buttons (various styles via classes)
+- `<input>` - Form inputs (text, number, range, checkbox, color)
+- `<textarea>` - Multiline text input
+- `<img>` - Static images
+- `<select>` - Dropdown menus
+- `<progress>` - Progress bars
 
-HyUI supports two custom button variants via `<button>` classes:
+### Specialized Elements
 
-* `custom-textbutton`: A text button with fully custom background and label styles per state.
-* `custom-button`: A square button with custom background styles per state (no text label styling).
+- `<hyvatar>` - Dynamic Hyvatar avatar rendering
+- `<timer>` - Time display labels
+- `<sprite>` - Animated sprites
+- `<nav class="tabs">` - Tab navigation
+- `<block-selector>` - Block selection UI
+- `<color-picker-dropdown-box>` - Color picker with dropdown
+- `<hotkey-label>` - Input binding display
+- `<menu-item>` - Menu item component
+- `<labeled-checkbox>` - Checkbox with integrated label
+- `<reorderable-list-grip>` - Drag handle for reorderable lists
+- `<scene-blur>` - Scene blur effect
 
-The custom styles are provided via `data-hyui-*-bg` and `data-hyui-*-label-style`. Each attribute accepts a small CSS declaration block (e.g., `color: #fff; font-size: 18;`) or a style definition reference using `@Name` from a `<style>` block. The `@Name` definitions are declared like a selector and resolved by HyUI.
+### Item-Related Elements
 
-```html
-<style>
-    @ShowcaseHoveredLabel {
-        font-weight: bold;
-        color: #ffffff;
-        font-size: 18;
-    }
-    @ShowcaseHoveredBackground {
-        background-color: #0c0c0c;
-    }
-    @ShowcaseCustomBackground {
-        background-image: url('Common/ShopTest.png');
-        background-color: rgba(255, 0, 0, 0.25);
-    }
-</style>
-
-<button class="custom-textbutton"
-        data-hyui-default-label-style="@ShowcaseHoveredLabel"
-        data-hyui-default-bg="@ShowcaseHoveredBackground"
-        style="anchor-height: 30;">Custom Text</button>
-
-<button class="custom-button"
-        data-hyui-default-bg="@ShowcaseCustomBackground"
-        style="anchor-width: 44; anchor-height: 44;"></button>
-```
-
-Supported custom label style keys:
-
-* `color`, `font-size`, `font-weight`, `font-style`, `text-transform`, `letter-spacing`
-* `white-space` (`nowrap` or `wrap`/`normal`)
-* `font-family`/`font-name`
-* `outline-color`/`text-outline-color`
-* `vertical-align`, `horizontal-align`, `text-align`, `align`
-
-Supported custom background style keys:
-
-* `background-image`
-* `background-color`
-
-## Custom Style Properties
-
-Some elements support additional style properties that are not exposed via the standard CSS mapping. Use `data-hyui-style` to set arbitrary style keys directly on the element's `HyUIStyle`:
-
-```html
-<div class="item-grid" data-hyui-style="SlotSpacing: 6"></div>
-```
-
-Multiple properties can be specified in the same attribute:
-
-```html
-<div class="item-grid" data-hyui-style="SlotSpacing: 6; SlotSize: 64"></div>
-```
-
-These map to `HyUIStyle.set(key, value)` and are applied alongside any existing CSS-derived styles.
+- `<span class="item-icon">` - Item icon display
+- `<span class="item-slot">` - Full item slot
+- `<div class="item-grid">` - Item grid container
+- `<div class="item-grid-slot">` - Item grid slot entry
 
 ## Image Assets
 
 All image paths (in `src` for `<img>` or `url()` for `background-image`) are relative to your mod's `Common/UI/Custom` folder.
 
-{% hint style="warning" %}
-Important: Hytale requires image assets to have a name ending in `@2x.png` for high-resolution support. For example, if you use `<img src="lizard.png"/>`, you must have a file named `lizard@2x.png` located in `src/main/resources/Common/UI/Custom/lizard@2x.png`.
-{% endhint %}
+**Important**: Hytale requires image assets to have a name ending in `@2x.png` for high-resolution support. For example, if you use `<img src="lizard.png"/>`, you must have a file named `lizard@2x.png` located in `src/main/resources/Common/UI/Custom/lizard@2x.png`.
 
-## Dynamic Images
+### Dynamic Images
 
 Use `class="dynamic-image"` on `<img>` to download a PNG at runtime:
 
@@ -249,12 +126,9 @@ Use `class="dynamic-image"` on `<img>` to download a PNG at runtime:
 <img class="dynamic-image" src="https://hyvatar.io/render/Elyra" />
 ```
 
-Notes:
+**Limits**: 10 dynamic images per page/player. Downloaded PNGs are cached for 15 seconds.
 
-* Dynamic images are limited to 10 per page, per player.
-* Downloaded PNGs are cached for 15 seconds.
-
-## Hyvatar Images
+### Hyvatar Images
 
 Use `<hyvatar>` to render Hyvatar avatars as dynamic images:
 
@@ -262,35 +136,13 @@ Use `<hyvatar>` to render Hyvatar avatars as dynamic images:
 <hyvatar username="Elyra" render="full" size="256" rotate="45"></hyvatar>
 ```
 
-Supported attributes:
+Attributes: `username`, `render` (head/full/cape), `size` (64-2048), `rotate` (0-360), `cape` (override).
 
-* `username`: The Hyvatar username to render.
-* `render`: `head`, `full`, or `cape`.
-* `size`: Image size (64-2048).
-* `rotate`: Rotation angle in degrees (0-360).
-* `cape`: Optional cape override for `render="cape"`.
+Thanks to Hyvatar.io for their fantastic work on the rendering service.
 
-Notes:
+## Common Patterns
 
-* Hyvatar images follow the same dynamic image slot limits and caching rules.
-* Thanks to Hyvatar.io for their fantastic work on the rendering service.
-
-## Special Layout Classes
-
-HYUIML provides several special classes for `<div>` elements that map to Hytale's common layout macros:
-
-* **`.page-overlay`**: Wraps its children in a Hytale `PageOverlay`. This is typically used as the root element of your UI to ensure it fills the screen and handles background dimming.
-* **`.container`**: Maps to a Hytale `Container`.
-* **`.decorated-container`**: Uses the decorated container UI file for a framed container style.
-  * Use the `data-hyui-title` attribute on this `div` to set the container's header title.
-  * **`.container-title`**: A special child `div` of `.container`. Any elements inside this will be placed in the container's **#Title** area (alongside the main title).
-  * **`.container-contents`**: A special child `div` of `.container`. Any elements inside this will be placed in the container's main **#Content** area.
-  * Note: If you don't use these specific child classes, elements added directly to a `.container` will be placed in the main `#Content` area by default.
-* **`.item-grid`**: Maps to an `ItemGrid` element. This is not a container; it renders a grid of item slots.
-* **`.item-grid-slot`**: Adds a slot entry to the nearest `.item-grid`. This does not render on its own.
-* **`.tab-content`**: Marks a div as tab content. Use `data-hyui-tab-id` to link it to a tab.
-
-Example usage:
+### Containers with Titles
 
 ```html
 <div class="page-overlay">
@@ -305,101 +157,54 @@ Example usage:
 </div>
 ```
 
-## Tabs (Tab Navigation + Content)
+- `.page-overlay` - Full-screen overlay root
+- `.container` / `.decorated-container` - Framed containers
+- `.container-title` - Elements in title area
+- `.container-contents` - Elements in content area
 
-Use a `<nav class="tabs">` element for the tab bar, and `<div class="tab-content">` blocks for the content. The tab content blocks are registered at build time and auto-hidden unless their tab is selected. This stays consistent across `updatePage()` rebuilds.
-
-Basic example using `data-tabs`:
+### Tabs
 
 ```html
-<nav id="main-tabs" class="tabs"
-     data-tabs="templates:Templates, timers:Timers, components:Components"
-     data-selected="templates">
-</nav>
+<nav class="tabs" data-tabs="tab1:Tab 1,tab2:Tab 2" data-selected="tab1"></nav>
 
-<div id="templates-content" class="tab-content" data-hyui-tab-id="templates">
-    <p>Template examples...</p>
+<div class="tab-content" data-hyui-tab-id="tab1">
+    <p>Tab 1 content</p>
 </div>
 
-<div id="timers-content" class="tab-content" data-hyui-tab-id="timers">
-    <p>Timer examples...</p>
-</div>
-
-<div id="components-content" class="tab-content" data-hyui-tab-id="components">
-    <p>Component examples...</p>
+<div class="tab-content" data-hyui-tab-id="tab2">
+    <p>Tab 2 content</p>
 </div>
 ```
 
-Linking content directly in the tab list:
+### Custom Buttons
 
 ```html
-<nav class="tabs"
-     data-tabs="templates:Templates:templates-content,timers:Timers:timers-content"
-     data-selected="templates">
-</nav>
+<style>
+    @MyButtonLabel {
+        color: #ffffff;
+        font-weight: bold;
+    }
+    @MyButtonBg {
+        background-color: #0c0c0c;
+    }
+</style>
+
+<button class="custom-textbutton"
+        data-hyui-default-label-style="@MyButtonLabel"
+        data-hyui-default-bg="@MyButtonBg">
+    Custom Button
+</button>
 ```
 
-Using explicit buttons:
+### Item Grids
 
 ```html
-<nav class="tabs" data-selected="templates">
-    <button data-tab="templates" data-tab-content="templates-content">Templates</button>
-    <button data-tab="timers" data-tab-content="timers-content">Timers</button>
-</nav>
+<div class="item-grid" data-hyui-slots-per-row="5">
+    <div class="item-grid-slot" data-hyui-name="Slot 1"></div>
+    <div class="item-grid-slot" data-hyui-name="Slot 2"></div>
+</div>
 ```
 
-Multiple tab navigations on one page:
+## Comments
 
-```html
-<nav id="left-tabs" class="tabs" data-tabs="a:A,b:B" data-selected="a"></nav>
-<nav id="right-tabs" class="tabs" data-tabs="x:X,y:Y" data-selected="x"></nav>
-
-<div class="tab-content" data-hyui-tab-id="a" data-hyui-tab-nav="left-tabs">...</div>
-<div class="tab-content" data-hyui-tab-id="x" data-hyui-tab-nav="right-tabs">...</div>
-```
-
-## Event Handling
-
-Events for elements defined in HYUIML are handled via the `PageBuilder` (or `HudBuilder`) using the IDs provided in the markup. Note that this is the primary way to add interaction to HYUIML elements, whereas elements loaded from raw `.ui` files via `.fromFile` do not support `.addEventListener`.
-
-```java
-builder.addEventListener("my-button", CustomUIEventBindingType.Activating, (ignored, ctx) -> {
-    playerRef.sendMessage(Message.raw("Button clicked!"));
-});
-```
-
-## Important Limitations & Gotchas
-
-While HYUIML looks like HTML, it is not a full browser engine. It is a lightweight bridge to Hytale's UI system.
-
-{% stepper %}
-{% step %}
-### Strict ID Sanitization
-
-Internally, Hytale only permits alphanumeric IDs. HyUI handles this by sanitizing your IDs (e.g., `my-button` becomes something like `HYUUIDmybutton0`). Always use your original ID (`my-button`) when calling `getById` or `addEventListener` in Java.
-{% endstep %}
-
-{% step %}
-### Limited CSS
-
-Only the properties listed above are supported. Traditional CSS layout (floats, flexbox, grid, positions) is not fully supported. From v0.5.0 onwards, partial flexbox support exists (e.g., `flex-direction`, `align-items`, `justify-content` mapping to layout/alignment), but layout is still primarily controlled by `Group` layout modes and `flex-weight`.
-{% endstep %}
-
-{% step %}
-### No Scripting
-
-`<script>` tags are ignored. All logic must be handled in Java.
-{% endstep %}
-
-{% step %}
-### Nesting Rules
-
-While most elements can be nested, some Hytale macros (like specialized buttons) might behave unexpectedly if wrapped in too many layers.
-{% endstep %}
-
-{% step %}
-### Comments
-
-Standard HTML comments `<!-- comment -->` are supported. In CSS, both `/* */` and `//` are supported.
-{% endstep %}
-{% endstepper %}
+HTML comments `<!-- comment -->` are supported. In CSS, both `/* */` and `//` are supported.

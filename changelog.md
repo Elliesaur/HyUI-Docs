@@ -2,6 +2,15 @@
 
 <details>
 
+<summary><strong>0.6.2 - 5 Feb 2026</strong></summary>
+
+* Rework styles and how they are applied. Please see the documentation on HYUIML (major update).
+* Add Hywind support, thanks to @kelpycodes.
+
+</details>
+
+<details>
+
 <summary><strong>0.6.1 - 3 Feb 2026</strong></summary>
 
 * Add getter for template processor on the UI context.
