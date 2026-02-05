@@ -1,4 +1,4 @@
-# HYUIML Limitations & Gotchas
+# HYUIML - Limitations
 
 While HYUIML looks like HTML and CSS, it is **not a full browser engine**. It's a lightweight syntax that maps to Hytale's UI system with some conveniences. Understanding these limitations will help you avoid frustration and build better UIs.
 
@@ -9,10 +9,11 @@ While HYUIML looks like HTML and CSS, it is **not a full browser engine**. It's 
 HYUIML is a declarative syntax that **looks like** HTML/CSS but maps to Hytale's native UI builders. Think of it as "HTML-inspired" rather than "HTML-compatible."
 
 **What this means**:
-- No DOM manipulation
-- No CSS cascade (specificity rules are simplified)
-- No browser APIs (querySelector, etc.)
-- CSS properties only work if they map to Hytale's styling system
+
+* No DOM manipulation
+* No CSS cascade (specificity rules are simplified)
+* No browser APIs (querySelector, etc.)
+* CSS properties only work if they map to Hytale's styling system
 
 ### 2. No JavaScript / Scripting
 
@@ -63,13 +64,14 @@ builder.getById("HYUUIDmybutton0"); // Wrong!
 Only CSS properties that map to Hytale's styling system are supported. See [HYUIML CSS](hyuiml-css.md) for the complete list.
 
 **Not supported**:
-- `position` (absolute, relative, fixed, sticky)
-- `z-index`
-- `transform`
-- `animation` / `transition`
-- `box-shadow`
-- `border` (use `background-image` with border values instead)
-- Most box model properties (use `anchor-*` and `padding-*` instead)
+
+* `position` (absolute, relative, fixed, sticky)
+* `z-index`
+* `transform`
+* `animation` / `transition`
+* `box-shadow`
+* `border` (use `background-image` with border values instead)
+* Most box model properties (use `anchor-*` and `padding-*` instead)
 
 ### 2. No CSS Units
 
@@ -97,9 +99,9 @@ All values are interpreted as pixels in Hytale's coordinate system.
 
 CSS specificity works differently than in browsers:
 
-- Style precedence: Inline `style` > CSS rules > Default styles
-- Later rules override earlier rules for the same selector
-- No complex specificity calculations (ID > class > element)
+* Style precedence: Inline `style` > CSS rules > Default styles
+* Later rules override earlier rules for the same selector
+* No complex specificity calculations (ID > class > element)
 
 ```css
 /* Both target the same element */
@@ -152,18 +154,20 @@ This maps to Hytale's 9-patch / patch-style system.
 HYUIML's layout system approximates flexbox but is actually Hytale's `LayoutMode` system.
 
 **Supported flexbox-like properties**:
-- `flex-direction` (maps to LayoutMode)
-- `justify-content` (maps to horizontal alignment)
-- `align-items` (maps to vertical alignment)
-- `flex-weight` (for distribution)
+
+* `flex-direction` (maps to LayoutMode)
+* `justify-content` (maps to horizontal alignment)
+* `align-items` (maps to vertical alignment)
+* `flex-weight` (for distribution)
 
 **Not supported**:
-- `flex-wrap`
-- `flex-grow`, `flex-shrink`, `flex-basis`
-- `order`
-- `align-self`
-- `align-content`
-- `gap` (use padding/margins instead)
+
+* `flex-wrap`
+* `flex-grow`, `flex-shrink`, `flex-basis`
+* `order`
+* `align-self`
+* `align-content`
+* `gap` (use padding/margins instead)
 
 **From v0.5.0**: `flex-weight` applies to the wrapping group for non-Group/Label elements, changing layout behavior from earlier versions.
 
@@ -174,9 +178,10 @@ CSS Grid (`display: grid`) is not supported. Use nested `<div>` elements with `L
 ### 3. No Absolute/Fixed Positioning
 
 There's no `position: absolute` or `position: fixed`. Elements are positioned by:
-- Their parent's `LayoutMode`
-- `anchor-*` properties (which work more like constraints than positioning)
-- `flex-weight` for space distribution
+
+* Their parent's `LayoutMode`
+* `anchor-*` properties (which work more like constraints than positioning)
+* `flex-weight` for space distribution
 
 ## Element Limitations
 
@@ -266,34 +271,20 @@ builder.addEventListener("SomeButton", ...); // Won't work
 
 ## Image Limitations
 
-### 1. Static Images Require @2x.png
-
-Hytale's high-resolution support requires the `@2x.png` suffix:
-
-```html
-<!-- In HYUIML -->
-<img src="logo.png" />
-
-<!-- Actual file required -->
-<!-- src/main/resources/Common/UI/Custom/logo@2x.png -->
-```
-
-Forgetting the `@2x.png` suffix will cause images to fail loading.
-
-### 2. Dynamic Image Limits
+### 1. Dynamic Image Limits
 
 Dynamic images (including Hyvatar) are limited:
 
-- **10 dynamic images** per page, per player
-- Downloaded PNGs cached for **15 seconds**
-- No support for animated images (GIF, APNG, etc.)
+* **10 dynamic images** per page, per player
+* Downloaded PNGs cached for **15 seconds**
+* No support for animated images (GIF, APNG, etc.)
 
 ```html
 <!-- ⚠️ Only 10 of these allowed per page -->
 <img class="dynamic-image" src="https://example.com/image.png" />
 ```
 
-### 3. Image Paths Are Relative
+### 2. Image Paths Are Relative
 
 All `src` paths are relative to `Common/UI/Custom`:
 
@@ -486,14 +477,14 @@ Custom buttons (`custom-textbutton`, `custom-button`) require state style defini
 
 Consider using HyUI's Java builders directly when:
 
-- You need complex dynamic behavior
-- You're building reusable components
-- Performance is critical
-- You need fine-grained control
+* You need complex dynamic behavior
+* You're building reusable components
+* Performance is critical
+* You need fine-grained control
 
 HYUIML is best for:
 
-- Static or semi-static layouts
-- Rapid prototyping
-- Declarative UIs with simple logic
-- When HTML/CSS familiarity speeds development
+* Static or semi-static layouts
+* Rapid prototyping
+* Declarative UIs with simple logic
+* When HTML/CSS familiarity speeds development
