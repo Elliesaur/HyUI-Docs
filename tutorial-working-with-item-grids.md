@@ -55,8 +55,8 @@ When you have multiple grids, use `data-hyui-inventory-section-id` to tag each g
 
 ```java
 page.addEventListener("salvage-grid", CustomUIEventBindingType.Dropped, DroppedEventData.class, (drop, ctx) -> {
-    String sourceSection = drop.getSourceInventorySectionId();
-    if ("20".equals(sourceSection)) {
+    Integer sourceSection = drop.getSourceInventorySectionId();
+    if (sourceSection != null && sourceSection == 20) {
         ctx.getById("summary", LabelBuilder.class).ifPresent(label -> {
             label.withText("Dragged from storage into salvage.");
         });
@@ -66,7 +66,7 @@ page.addEventListener("salvage-grid", CustomUIEventBindingType.Dropped, DroppedE
 ```
 
 {% hint style="info" %}
-`SourceInventorySectionId` is returned as a string. Use string comparison or parse it to an integer.
+`SourceInventorySectionId` is returned as an Integer.
 {% endhint %}
 
 {% endstep %}

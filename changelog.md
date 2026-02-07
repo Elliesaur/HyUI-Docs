@@ -2,6 +2,12 @@
 
 <details>
 
+<summary><strong>0.8.1 - 8 Feb 2026</strong></summary>
+* Fix: Item Grid Section Id wrong data type, now Integer.
+</details>
+
+<details>
+
 <summary><strong>0.8.0 - 7 Feb 2026</strong></summary>
 
 * Docs: Add native tab navigation and dynamic pane documentation and examples.
