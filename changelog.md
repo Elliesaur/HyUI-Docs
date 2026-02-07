@@ -2,6 +2,20 @@
 
 <details>
 
+<summary><strong>0.8.0 - 7 Feb 2026</strong></summary>
+
+* Docs: Add native tab navigation and dynamic pane documentation and examples.
+* Feature: Document native tab navigation and dynamic pane builders with full usage examples.
+* Feature: Expanded HYUIML element coverage for action buttons, sliders, color pickers, dropdowns, item grids/slots, block selectors, and native timer labels.
+* Feature: Parity with released official documentation with the addition of several new element types.
+* Feature: Item grids now have inventory section id support and source differentiation.
+* Feature: Add support for tooltip textspans (multiple).
+* Feature: Add support for label textspans, check the HYUIML docs or use builders.
+
+</details>
+
+<details>
+
 <summary><strong>0.7.0 - 5 Feb 2026</strong></summary>
 
 * Rework styles and how they are applied. Please see the documentation on HYUIML (major update).

@@ -61,6 +61,36 @@ The value passed to `.withValue(String)` MUST exist within the entries added to 
 
 ***
 
+#### Dropdown Advanced Options
+
+Use these when you need read-only dropdowns, search input, or a forced label.
+
+**HYUIML Example**
+
+```html
+<select id="searchableDropdown"
+        data-hyui-show-search-input="true"
+        data-hyui-is-read-only="false"
+        data-hyui-forced-label="Pick an option">
+    <option value="One">One</option>
+    <option value="Two">Two</option>
+</select>
+```
+
+**Java Builder Example**
+
+```java
+DropdownBoxBuilder.dropdownBox()
+    .withId("searchableDropdown")
+    .withShowSearchInput(true)
+    .withIsReadOnly(false)
+    .withForcedLabel("Pick an option")
+    .addEntry("One", "One")
+    .addEntry("Two", "Two");
+```
+
+***
+
 #### Item Icon Button Example
 
 It is often useful to combine a button with an item icon and labels to create interactive inventory-style elements. This example combines a button, item icon, and labels within the button.
@@ -174,6 +204,73 @@ Custom buttons support extensive per-state styling for both label and background
 
 ***
 
+#### Label Text Span Example
+
+Labels can be built with multiple text spans for mixed styling, and tooltip text spans can contain multiple entries.
+
+**HYUIML Example**
+
+```html
+<label id="span-label">
+    <span data-hyui-bold="true">Hey</span>
+    <span data-hyui-color="#ff0000">Hey3</span>
+    <span data-hyui-color="#ffff00">Hey5</span>
+    <tooltip>
+        <span data-hyui-bold="true">Lol</span>
+        <span>No</span>
+    </tooltip>
+</label>
+```
+
+**Java Builder Example**
+
+```java
+LabelBuilder.label()
+    .withText("Hey")
+    .withTooltipTextSpans(List.of(
+        Message.raw("Lol").bold(true),
+        Message.raw("No").bold(false)
+    ))
+    .addTextSpan(Message.raw("Hey3").bold(true).color(Color.RED))
+    .addTextSpan(Message.raw("Hey4").bold(true).color(Color.RED))
+    .addTextSpan(Message.raw("Hey5").bold(true).color(Color.YELLOW));
+```
+
+{% hint style="info" %}
+`withTooltipTextSpans(...)` accepts multiple spans. Use `withTooltipTextSpan(...)` if you only need one.
+{% endhint %}
+
+***
+
+#### Action Button Example
+
+Action buttons support key binding labels and optional modifier labels.
+
+**HYUIML Example**
+
+```html
+<button class="action-button"
+        data-hyui-action-name="Build"
+        data-hyui-key-binding-label="B"
+        data-hyui-binding-modifier1-label="Ctrl"
+        data-hyui-action-button-alignment="Right">
+    Build
+</button>
+```
+
+**Java Builder Example**
+
+```java
+ActionButtonBuilder.actionButton()
+    .withId("BuildAction")
+    .withActionName("Build")
+    .withKeyBindingLabel("B")
+    .withBindingModifier1Label("Ctrl")
+    .withAlignment(ActionButtonAlignment.Right);
+```
+
+***
+
 #### Sprite Example
 
 A `Sprite` displays an animated sequence of frames from a spritemap texture.
@@ -254,6 +351,161 @@ PageBuilder.pageForPlayer(playerRef)
 Note: `addElement(...)` only attaches elements to the root. To nest elements, use `.addChild(...)` on the parent builder.
 
 If you have multiple tab navs, set `data-hyui-tab-nav` (HYUIML) or `withTabNavigationId(...)` (Java) on the content to target a specific navigation ID.
+
+***
+
+#### Native Tab Navigation Example
+
+Native tab navigation uses Hytale's built-in tabs with the `native-tab-navigation` class and `native-tab-button` entries.
+
+**HYUIML Example**
+
+```html
+<nav id="native-tabs"
+     class="native-tab-navigation"
+     data-selected-tab="NativeTabOne"
+     data-allow-unselection="false">
+    <button class="native-tab-button" data-hyui-tab-id="NativeTabOne">HELLO</button>
+    <button class="native-tab-button" data-hyui-tab-id="NativeTabTwo">SECOND</button>
+</nav>
+```
+
+**Java Builder Example**
+
+```java
+NativeTabNavigationBuilder.nativeTabNavigation()
+    .withId("NativeTabNavigationExample")
+    .withSelectedTab("NativeTabOne")
+    .withAllowUnselection(false)
+    .withStyle(DefaultStyles.textTopTabsStyle())
+    .onSelectedTabChanged((event) -> {
+        playerRef.sendMessage(Message.raw("Selected: " + event.getSelectedTabId()));
+    })
+    .addTab(new NativeTab().withId("NativeTabOne").withText("HELLO"))
+    .addTab(new NativeTab().withId("NativeTabTwo").withText("SECOND"));
+```
+
+{% hint style="info" %}
+Native tabs emit a `SelectedTabChanged` event. In HYUIML pages, use the tab navigation element ID with `PageBuilder.addEventListener(...)` if you prefer context-based handling.
+{% endhint %}
+
+***
+
+#### Native Timer Label Example
+
+Native timer labels use Hytale's timer control and are configured via class + data attributes.
+
+**HYUIML Example**
+
+```html
+<label class="native-timer-label"
+       data-hyui-seconds="45"
+       data-hyui-direction="Down">
+</label>
+```
+
+**Java Builder Example**
+
+```java
+NativeTimerLabelBuilder.nativeTimerLabel()
+    .withSeconds(45)
+    .withDirection(TimerDirection.Down);
+```
+
+***
+
+#### Dynamic Pane Example
+
+Dynamic panes are resizable containers. A `dynamic-pane` must be a direct child of a `dynamic-pane-container`.
+
+**HYUIML Example**
+
+```html
+<div id="pane-container" class="dynamic-pane-container" style="layout-mode: left; anchor-width: 260; anchor-height: 120;">
+    <div id="pane-left" class="dynamic-pane"
+         data-hyui-min-size="80"
+         data-hyui-resize-at="End"
+         data-hyui-resizer-size="4"
+         data-hyui-resizer-background="#00000040">
+        <p>Pane A</p>
+    </div>
+    <div id="pane-right" class="dynamic-pane"
+         data-hyui-min-size="80">
+        <p>Pane B</p>
+    </div>
+</div>
+```
+
+**Java Builder Example**
+
+```java
+DynamicPaneContainerBuilder.dynamicPaneContainer()
+    .withId("DynamicPaneContainerExample")
+    .withLayoutMode(LayoutMode.Left)
+    .addPane(DynamicPaneBuilder.dynamicPane()
+        .withId("DynamicPaneExampleLeft")
+        .withMinSize(80)
+        .withResizeAt(ResizeType.End)
+        .withResizerSize(4)
+        .withResizerBackground(new HyUIPatchStyle().setColor("#00000040"))
+        .onMouseButtonReleased(() -> {
+            playerRef.sendMessage(Message.raw("Pane drag released."));
+        })
+        .onScrolled(value -> {
+            playerRef.sendMessage(Message.raw("Pane scrolled: " + value));
+        })
+        .addChild(LabelBuilder.label().withText("Pane A")))
+    .addPane(DynamicPaneBuilder.dynamicPane()
+        .withId("DynamicPaneExampleRight")
+        .withMinSize(80)
+        .addChild(LabelBuilder.label().withText("Pane B")));
+```
+
+{% hint style="info" %}
+Dynamic panes support `onScrolled`, `onValidating`, `onDismissing`, and `onMouseButtonReleased` handlers. Containers also support `onScrolled`, `onValidating`, and `onDismissing`.
+{% endhint %}
+
+***
+
+#### Item Grid Example
+
+Item grids can tag slots with an inventory section id so drop handlers can identify the source grid.
+
+**HYUIML Example**
+
+```html
+<div id="salvage-grid"
+     class="item-grid"
+     data-hyui-slots-per-row="4"
+     data-hyui-inventory-section-id="10"
+     data-hyui-are-items-draggable="true">
+    <div class="item-grid-slot" data-hyui-item-id="Ore_Gold" data-hyui-quantity="8"></div>
+    <div class="item-grid-slot"></div>
+</div>
+```
+
+**Java Builder Example**
+
+```java
+ItemGridBuilder.itemGrid()
+    .withId("salvage-grid")
+    .withSlotsPerRow(4)
+    .withInventorySectionId(10)
+    .withAreItemsDraggable(true)
+    .addSlot(new ItemGridSlot(new ItemStack("Ore_Gold", 8)))
+    .addSlot(new ItemGridSlot());
+```
+
+**Drop Handler Example**
+
+```java
+page.addEventListener("salvage-grid", CustomUIEventBindingType.Dropped, DroppedEventData.class, (drop, ctx) -> {
+    String sourceSection = drop.getSourceInventorySectionId();
+    if ("10".equals(sourceSection)) {
+        playerRef.sendMessage(Message.raw("Dropped from salvage grid."));
+    }
+});
+```
 
 ***
 

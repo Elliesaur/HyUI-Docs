@@ -16,6 +16,8 @@ Maps to `GroupBuilder` by default. Used for layout and containers.
 * `decorated-container` - `ContainerBuilder.decoratedContainer()` - Styled framed container
 * `tab-content` - `TabContentBuilder` - Tab content container
 * `item-grid` - `ItemGridBuilder` - Item grid display
+* `dynamic-pane-container` - `DynamicPaneContainerBuilder` - Container for resizable panes
+* `dynamic-pane` - `DynamicPaneBuilder` - A resizable pane within a `dynamic-pane-container`
 
 **Container-Specific Child Classes**:
 
@@ -44,6 +46,24 @@ Maps to `GroupBuilder` by default. Used for layout and containers.
 * `data-hyui-keep-scroll-position` - Maintain scroll position
 * `data-hyui-show-scrollbar` - Display scrollbar
 * `data-hyui-slots-per-row` - Number of slots per row
+* `data-hyui-info-display` - Info display mode
+* `data-hyui-adjacent-info-pane-grid-width` - Adjacent info pane grid width
+* `data-hyui-inventory-section-id` - Inventory section id (integer)
+* `data-hyui-allow-max-stack-draggable-items` - Allow max stack drag (boolean)
+* `data-hyui-display-item-quantity` - Display item quantity (boolean)
+
+**Dynamic Pane Container Attributes** (for `dynamic-pane-container` class):
+
+* `data-hyui-layout-mode` or `style="layout-mode: ..."` - Layout mode for pane direction (`Left`, `Right`, `Top`, `Bottom`)
+
+**Dynamic Pane Attributes** (for `dynamic-pane` class):
+
+* `data-hyui-layout-mode` - Layout mode of the pane
+* `data-hyui-min-size` - Minimum size of the pane
+* `data-hyui-resize-at` - Edge to resize from (`Start` or `End`)
+* `data-hyui-resizer-size` - Size of the resize handle
+* `data-hyui-resizer-background` - Background style of the resizer
+* Note: these attributes are not currently parsed from HYUIML. Use builders to set them for now.
 
 ### `<div class="item-grid-slot">`
 
@@ -51,6 +71,8 @@ Maps to `ItemGridSlot`. Defines a slot entry within an item grid.
 
 **Attributes**:
 
+* `data-hyui-item-id` - Item ID
+* `data-hyui-quantity` - Item quantity
 * `data-hyui-name` - Slot label/name
 * `data-hyui-description` - Slot description
 * `data-hyui-item-incompatible` - Mark as incompatible
@@ -71,6 +93,20 @@ Maps to `LabelBuilder`. Standard text display.
 
 * `id`, `class`, `style` - Standard attributes
 * All styling attributes (see CSS documentation)
+
+**Text Spans**:
+
+Use `<span>` or `<text-span>` children to create multiple styled spans.
+
+* `data-hyui-bold` - `true`/`false`
+* `data-hyui-italic` - `true`/`false`
+* `data-hyui-monospace` - `true`/`false`
+* `data-hyui-color` - Color string
+* `data-hyui-link` - Link URL
+
+**Tooltip Text Spans**:
+
+Any element can include a `<tooltip>` child with `<span>`/`<text-span>` entries to create multiple tooltip spans. Use `data-hyui-tooltiptext` for a simple single-span tooltip.
 
 **Example**:
 
@@ -96,6 +132,22 @@ Maps to `TimerLabelBuilder`. Displays formatted time values.
 ```html
 <timer value="60000" format="hms"></timer>
 <timer data-hyui-time-seconds="120" format="human" prefix="Time: "></timer>
+```
+
+### `<label class="native-timer-label">`
+
+Maps to `NativeTimerLabelBuilder`. Native timer label.
+
+**Attributes**:
+
+* `data-hyui-seconds` - Time in seconds
+* `data-hyui-direction` - `Up` or `Down`
+* `data-hyui-paused` - Pause toggle (boolean)
+
+**Example**:
+
+```html
+<label class="native-timer-label" data-hyui-seconds="30" data-hyui-direction="Down"></label>
 ```
 
 ### `<hotkey-label>`, `<hyui-hotkey-label>`
@@ -154,7 +206,12 @@ Maps to `ButtonBuilder` variants based on classes and attributes.
 
 * `data-hyui-action-name` or `data-hyui-action` - Action name
 * `data-hyui-key-binding-label` - Key binding label
+* `data-hyui-binding-modifier1-label` - Modifier label 1
+* `data-hyui-binding-modifier2-label` - Modifier label 2
+* `data-hyui-is-available` - Availability flag (boolean)
+* `data-hyui-is-hold-binding` - Hold binding flag (boolean)
 * `data-hyui-action-button-alignment` - Alignment value
+* `data-hyui-layout-mode` - Layout mode (`Left`, `Right`, `Top`, `Bottom`)
 
 **Item Slot Button Attributes** (`item-slot-button`):
 
@@ -233,6 +290,7 @@ Maps to slider builders. Type determined by classes:
 * `min`, `data-hyui-min` - Minimum value
 * `max`, `data-hyui-max` - Maximum value
 * `step`, `data-hyui-step` - Step increment
+* `readonly` or `data-hyui-is-read-only` - Make read-only (game slider)
 
 **Slider Number Field Attributes**:
 
@@ -278,6 +336,8 @@ Maps to `ColorPickerBuilder`.
 **Attributes**:
 
 * `value` - Initial color value
+* `data-hyui-display-text-field` - Show text field (boolean)
+* `data-hyui-reset-transparency-when-changing-color` - Reset transparency (boolean)
 
 **Example**:
 
@@ -332,6 +392,11 @@ Maps to `DropdownBoxBuilder`. Use `<option>` children for entries.
 * `data-hyui-maxselection` - Maximum selectable items
 * `data-hyui-entryheight` - Height of each entry
 * `data-hyui-showlabel` - Show or hide label
+* `disabled` or `data-hyui-disabled` - Disable selection
+* `data-hyui-is-read-only` - Read-only mode
+* `data-hyui-show-search-input` - Show search input (boolean)
+* `data-hyui-forced-label` - Force label text
+* `data-hyui-display-non-existing-value` - Display non-existing value (boolean)
 
 **Example**:
 
@@ -448,6 +513,7 @@ Maps to `ItemIconBuilder`. Displays an item icon.
 **Attributes**:
 
 * `data-hyui-item-id` - Item ID to display
+* `src` - Alternate item id source (same as `data-hyui-item-id`)
 
 **Example**:
 
@@ -464,6 +530,7 @@ Maps to `ItemSlotBuilder`. Displays a full item slot with background.
 * `data-hyui-item-id` - Item ID to display
 * `data-hyui-show-quality-background` - Show item quality background
 * `data-hyui-show-quantity` - Show item quantity
+* `src` - Alternate item id source (same as `data-hyui-item-id`)
 
 **Example**:
 
@@ -500,6 +567,44 @@ Maps to `TabNavigationBuilder`. Tab navigation bar.
 </nav>
 ```
 
+### `<nav class="native-tab-navigation">`
+
+Maps to `NativeTabNavigationBuilder`. This uses Hytale's native tab navigation component, not HyUI's custom tabs.
+
+**Attributes**:
+
+* `data-selected-tab` - Initially selected tab ID
+* `data-allow-unselection` - Allow clearing selection (boolean)
+
+**Style Classes**:
+
+* `header-style` - Uses `DefaultStyles.headerTabsStyle()`
+* `icon-style` - Uses `DefaultStyles.iconOnlyTopTabsStyle()`
+* No class defaults to `DefaultStyles.textTopTabsStyle()`
+
+**Children**: Use `<button class="native-tab-button">` entries to define tabs.
+
+**Native Tab Button Attributes**:
+
+* `data-hyui-tab-id` (or `id`) - Tab ID
+* `data-hyui-text` (or text content) - Tab label
+* `data-hyui-tooltiptext` - Tooltip text
+* `data-hyui-icon` - Icon texture path
+* `data-hyui-icon-selected` - Selected icon texture path
+* `data-hyui-icon-anchor-*` - Icon anchor values (`left`, `right`, `top`, `bottom`, `width`, `height`, `full`, `horizontal`, `vertical`)
+
+**Example**:
+
+```html
+<nav id="native-tabs"
+     class="native-tab-navigation"
+     data-selected-tab="tab-one"
+     data-allow-unselection="false">
+    <button class="native-tab-button" data-hyui-tab-id="tab-one">Overview</button>
+    <button class="native-tab-button" data-hyui-tab-id="tab-two">Details</button>
+</nav>
+```
+
 ## Game-Specific Elements
 
 ### `<block-selector>`, `<hyui-block-selector>`
@@ -509,6 +614,7 @@ Maps to `BlockSelectorBuilder`. Block selection UI.
 **Attributes**:
 
 * `data-hyui-capacity` or `capacity` - Maximum capacity
+* `data-hyui-value` or `value` - Selected value
 
 **Example**:
 
@@ -533,6 +639,29 @@ Maps to `MenuItemBuilder`. Menu item component.
 
 ```html
 <menu-item data-hyui-text="Save" data-hyui-icon="icons/save.png"></menu-item>
+```
+
+### `<reorderable-list>`, `<hyui-reorderable-list>`
+
+Maps to `ReorderableListBuilder`. Reorderable list container.
+
+**Attributes**:
+
+* `data-hyui-scrollbar-style` - Scrollbar style reference
+
+**Example**:
+
+```html
+<reorderable-list>
+  <div class="row">
+    <reorderable-list-grip></reorderable-list-grip>
+    <label>Item One</label>
+  </div>
+  <div class="row">
+    <reorderable-list-grip></reorderable-list-grip>
+    <label>Item Two</label>
+  </div>
+</reorderable-list>
 ```
 
 ### `<reorderable-list-grip>`, `<hyui-reorderable-list-grip>`

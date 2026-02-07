@@ -17,6 +17,7 @@ We will build a simple page with a grid of salvaged items and a short summary la
                 &#x3C;div id="salvage-grid"
                      class="item-grid"
                      data-hyui-slots-per-row="4"
+                     data-hyui-inventory-section-id="10"
                      data-hyui-are-items-draggable="true">
                     &#x3C;div class="item-grid-slot"
                          data-hyui-item-id="Ore_Mithril"
@@ -25,6 +26,13 @@ We will build a simple page with a grid of salvaged items and a short summary la
                          data-hyui-item-id="Ore_Mithril"
                          data-hyui-quantity="1">&#x3C;/div>
                     <a data-footnote-ref href="#user-content-fn-1">&#x3C;div class="item-grid-slot">&#x3C;/div></a>
+                &#x3C;/div>
+                &#x3C;div id="storage-grid"
+                     class="item-grid"
+                     data-hyui-slots-per-row="4"
+                     data-hyui-inventory-section-id="20"
+                     data-hyui-are-items-draggable="true">
+                    &#x3C;div class="item-grid-slot">&#x3C;/div>
                 &#x3C;/div>
             &#x3C;/div>
         &#x3C;/div>
@@ -38,6 +46,29 @@ page.open(store);
 </code></pre>
 
 This gives you a clean grid with a mix of filled and empty slots. Now we can listen for slot interactions.
+{% endstep %}
+
+{% step %}
+### Differentiate Grids with Inventory Section IDs
+
+When you have multiple grids, use `data-hyui-inventory-section-id` to tag each grid. The drop payload includes `SourceInventorySectionId`, letting you tell which grid the drag started from.
+
+```java
+page.addEventListener("salvage-grid", CustomUIEventBindingType.Dropped, DroppedEventData.class, (drop, ctx) -> {
+    String sourceSection = drop.getSourceInventorySectionId();
+    if ("20".equals(sourceSection)) {
+        ctx.getById("summary", LabelBuilder.class).ifPresent(label -> {
+            label.withText("Dragged from storage into salvage.");
+        });
+        ctx.updatePage(false);
+    }
+});
+```
+
+{% hint style="info" %}
+`SourceInventorySectionId` is returned as a string. Use string comparison or parse it to an integer.
+{% endhint %}
+
 {% endstep %}
 
 {% step %}
