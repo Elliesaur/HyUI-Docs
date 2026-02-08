@@ -2,6 +2,12 @@
 
 <details>
 
+<summary><strong>0.8.2 - 8 Feb 2026</strong></summary>
+* Fix: Events should work better for Mouse Released/Dismissing/Validating.
+</details>
+
+<details>
+
 <summary><strong>0.8.1 - 8 Feb 2026</strong></summary>
 * Fix: Item Grid Section Id wrong data type, now Integer.
 </details>
