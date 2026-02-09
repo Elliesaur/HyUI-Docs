@@ -2,6 +2,15 @@
 
 <details>
 
+<summary><strong>0.8.3 - 9 Feb 2026</strong></summary>
+
+* Fix: Label Builder now supports padding again...
+
+</details>
+
+
+<details>
+
 <summary><strong>0.8.2 - 8 Feb 2026</strong></summary>
 
 * Fix: Events should work better for Mouse Released/Dismissing/Validating.
