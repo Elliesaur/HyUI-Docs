@@ -2,6 +2,14 @@
 
 <details>
 
+<summary><strong>0.8.4 - 10 Feb 2026</strong></summary>
+
+* Feature: Buttons can now have background images on style states.
+
+</details>
+
+<details>
+
 <summary><strong>0.8.3 - 9 Feb 2026</strong></summary>
 
 * Fix: Label Builder now supports padding again...
