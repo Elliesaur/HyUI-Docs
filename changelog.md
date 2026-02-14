@@ -2,6 +2,19 @@
 
 <details>
 
+<summary><strong>0.8.5 - 14 Feb 2026</strong></summary>
+
+* Fix: Dynamic images being broken upon page load
+* Feature: Caching images per player with the new overloads for PngDownloadUtils, this will send the asset to the client which results in a zero load time for the page.
+* Fix: Spaces between tooltips/textspans were not rendered, adapted to render these and any other whitespace.
+* Fix: If a bar is set on a progressbar, do not set defaults for bar and effect texturepaths.
+
+NOTE: This release is designed for the "Release" stream of Hytale, NOT pre-release. Pre-release will NOT work with this.
+
+</details>
+
+<details>
+
 <summary><strong>0.8.4 - 10 Feb 2026</strong></summary>
 
 * Feature: Buttons can now have background images on style states.
