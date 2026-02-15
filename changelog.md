@@ -1,5 +1,17 @@
 # Changelog
 
+
+<details>
+
+<summary><strong>0.8.7 - 15 Feb 2026</strong></summary>
+
+* Styles: Allow button `.withStyle(BsonStyle)` to override and ignore restrictions on styles.
+* Fix: Repairing of Ellie's silly mistake with a 2 instead of 1 for packet length.
+
+NOTE: This release is designed for the "Release" stream of Hytale, NOT pre-release. Pre-release will NOT work with this.
+
+</details>
+
 <details>
 
 <summary><strong>0.8.5 - 14 Feb 2026</strong></summary>
