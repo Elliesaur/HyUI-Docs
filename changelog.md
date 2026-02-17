@@ -5,16 +5,15 @@
 
 * Feature: Hot reloading UI/HTML files now does not require closing the UI/HUD. It will automatically reload changes.
 * Support for pre-release asset sending.
+* Fix: SliderNumberBuilder event expecting Integer, found Double.
 
 **NOTE: There is no support for 2026.02.06 server version.**
 
 ### This release has MULTIPLE versions: 
 
-#### HyUI-0.8.8-pre-release-server-version.jar
+#### HyUI-0.8.8-release-server-version.jar
 
-Ties it to the server version present in pre-release. 
-The assumption is that server version warnings will
-disappear with this if the Hytale team release with the same revision.
+Ties it to the server version present to release. No warning should appear in chat.
 
 #### HyUI-0.8.8-no-server-version.jar
 
