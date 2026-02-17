@@ -1,4 +1,27 @@
 # Changelog
+<details>
+
+<summary><strong>0.8.8 - 17 Feb 2026</strong></summary>
+
+* Feature: Hot reloading UI/HTML files now does not require closing the UI/HUD. It will automatically reload changes.
+* Support for pre-release asset sending.
+
+**NOTE: There is no support for 2026.02.06 server version.**
+
+### This release has MULTIPLE versions: 
+
+#### HyUI-0.8.8-pre-release-server-version.jar
+
+Ties it to the server version present in pre-release. 
+The assumption is that server version warnings will
+disappear with this if the Hytale team release with the same revision.
+
+#### HyUI-0.8.8-no-server-version.jar
+
+This version allows any server version, this will cause a warning in chat to players.
+Choose the version that fits your needs.
+
+</details>
 
 
 <details>
