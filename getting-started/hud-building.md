@@ -19,6 +19,8 @@ HudBuilder.hudForPlayer(playerRef)
     .show(store);
 ```
 {% endcode %}
+
+If you want to parse a `.ui` file into HyUI elements (so you can use `getById(...)` and add events), use `fromUIFile(...)` instead. This is **experimental** in 0.9.0+.
 {% endstep %}
 
 {% step %}

@@ -255,19 +255,11 @@ Only elements with `id` attributes can have event listeners attached:
 <button>Submit</button>
 ```
 
-### 5. Elements from .ui Files Don't Support Events
+### 5. UI File Parsing Is Experimental (0.9.0+)
 
-HYUIML elements support `.addEventListener()`, but elements loaded via `.fromFile()` from raw `.ui` files do not:
+Use `fromUIFile(...)` to parse `.ui` files into HyUI elements so you can call `getById(...)` and attach events. This feature is **experimental**, and may change as it matures.
 
-```java
-// ✅ HYUIML elements support events
-builder.fromHtml("<button id='btn'>Click</button>");
-builder.addEventListener("btn", ...);
-
-// ❌ .ui file elements don't support addEventListener
-builder.fromFile("MyUI.ui");
-builder.addEventListener("SomeButton", ...); // Won't work
-```
+If you use `fromFile(...)`, the UI is loaded as raw assets (no parsing), so element access is limited to low-level commands like `.editElement(...)`.
 
 ## Image Limitations
 

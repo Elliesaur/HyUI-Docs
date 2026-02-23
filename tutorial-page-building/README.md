@@ -12,10 +12,6 @@ There are multiple ways to define the content of your page:
 
 You can load an existing Hytale `.ui` file as the base for your page. HyUI often uses a "Placeholder" UI that provides a standard container and title.
 
-{% hint style="info" %}
-Elements defined within the `.ui` file cannot have event listeners attached to them via `.addEventListener`. This method is only for elements created via the Java Builder API or HYUIML. To interact with elements in a `.ui` file, use `.editElement` to send raw UI commands.
-{% endhint %}
-
 {% code title="Example" %}
 ```java
 PageBuilder.pageForPlayer(playerRef)
@@ -23,6 +19,28 @@ PageBuilder.pageForPlayer(playerRef)
     .open(store);
 ```
 {% endcode %}
+
+#### UI File Parsing (experimental, 0.9.0+)
+
+HyUI can parse `.ui` files into HyUI elements using `fromUIFile(...)`. This makes UI files first-class: you can use `getById(...)`, attach event listeners, and edit them just like builder/HYUIML elements. It is a step toward full UI-file parity in HyUI, so existing `.ui` layouts can gradually gain interactivity without being rewritten.
+
+{% hint style="warning" %}
+UI file parsing is **experimental**. APIs may change while it matures.
+{% endhint %}
+
+{% code title="Example" %}
+```java
+var pb = PageBuilder.detachedPage()
+    .fromUIFile("Pages/ComplexTest.ui");
+
+pb.getById("SaveButton", ButtonBuilder.class).ifPresent((b) -> {
+    b.addEventListener(CustomUIEventBindingType.Activating, (e) ->
+        HytaleLogger.forEnclosingClass().atInfo().log(b.toString()));
+});
+```
+{% endcode %}
+
+By default, parsing uses asset sources from the game plus any loaded assets (such as when developing plugins with the `--assets` flag).
 {% endstep %}
 
 {% step %}
