@@ -126,7 +126,15 @@ Use `class="dynamic-image"` on `<img>` to download a PNG at runtime:
 <img class="dynamic-image" src="https://hyvatar.io/render/Elyra" />
 ```
 
-**Limits**: 10 dynamic images per page/player. Downloaded PNGs are cached for 15 seconds.
+File path support (0.9.0+): you can load dynamic images from the `mods` directory using a relative path:
+
+```html
+<img class="dynamic-image" src="ModGroup_ModName/avatars/head/Elyra.png" />
+```
+
+This resolves to `mods/ModGroup_ModName/avatars/head/Elyra.png`.
+
+**Limits**: 25 dynamic images per page/player. Downloaded PNGs are cached for 15 seconds.
 
 ### Hyvatar Images
 

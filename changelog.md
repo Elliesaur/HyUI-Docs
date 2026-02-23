@@ -1,4 +1,18 @@
 # Changelog
+
+<details>
+
+<summary><strong>0.9.0 - 24 Feb 2026</strong></summary>
+
+* Feature: UI file parsing (experimental).
+* Feature: Add file path support for dynamic images.
+* Feature: ScrollbarStyle can now be used for `.withScrollbarStyle`.
+* Feature: `onClick` helper methods for `ButtonBuilder` and `CustomButtonBuilder`.
+* Fix: Label Alignment corrected to Start, Center, End.
+* Increase: 25 dynamic images per player on screen at one time.
+
+</details>
+
 <details>
 
 <summary><strong>0.8.8 - 17 Feb 2026</strong></summary>

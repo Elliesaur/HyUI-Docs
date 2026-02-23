@@ -37,6 +37,18 @@ In your HTML (HYUIML), mark an image as dynamic and give it an ID:
 ```
 {% endcode %}
 
+**File path support (0.9.0+)**: Dynamic images can also load from file paths relative to the `mods` directory.
+
+{% code title="HTML" %}
+```html
+<div class="dynamic-image" id="npc-head-image"
+     data-hyui-image-url="ModGroup_ModName/avatars/head/Elyra.png"
+     style="anchor-width: 96; anchor-height: 96;"></div>
+```
+{% endcode %}
+
+The example above resolves to `mods/ModGroup_ModName/avatars/head/Elyra.png`.
+
 ### Prefetch and cache on player join
 
 Use this when you already know which images a player will likely need.

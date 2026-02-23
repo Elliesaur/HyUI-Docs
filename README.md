@@ -56,6 +56,7 @@ String html = """
                 <p>Welcome to the menu!</p>
                 <button id="myBtn">Click Me</button>
                 <img class="dynamic-image" src="https://example.invalid/render/PlayerName" />
+                <img class="dynamic-image" src="ModGroup_ModName/avatars/head/Elyra.png" />
             </div>
         </div>
     </div>

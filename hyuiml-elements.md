@@ -419,16 +419,17 @@ Maps to `ImageBuilder` or `DynamicImageBuilder` (with `dynamic-image` class).
 * `src` - Image path (relative to `Common/UI/Custom`)
 * `width` - Image width (maps to anchor-width)
 * `height` - Image height (maps to anchor-height)
-* `class="dynamic-image"` - Enable dynamic image loading from URL
+* `class="dynamic-image"` - Enable dynamic image loading from URL or file path (0.9.0+)
 
 **Examples**:
 
 ```html
 <img src="logo.png" width="128" height="128" />
 <img class="dynamic-image" src="https://example.com/image.png" />
+<img class="dynamic-image" src="ModGroup_ModName/avatars/head/Elyra.png" />
 ```
 
-**Note**: Static images require `@2x.png` suffix in filename.
+**Note**: Static images are in your resources package. They perform better with `@2x.png` (2x resolution) suffix in filename. Dynamic image file paths are relative to `mods` directory, so the example above resolves to `mods/ModGroup_ModName/avatars/head/Elyra.png`.
 
 ### `<hyvatar>`
 

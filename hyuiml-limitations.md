@@ -275,14 +275,22 @@ builder.addEventListener("SomeButton", ...); // Won't work
 
 Dynamic images (including Hyvatar) are limited:
 
-* **10 dynamic images** per page, per player
+* **25 dynamic images** per page, per player
 * Downloaded PNGs cached for **15 seconds**
 * No support for animated images (GIF, APNG, etc.)
 
 ```html
-<!-- ⚠️ Only 10 of these allowed per page -->
+<!-- ⚠️ Only 25 of these allowed per page -->
 <img class="dynamic-image" src="https://example.com/image.png" />
 ```
+
+File path support (0.9.0+), relative to `mods`:
+
+```html
+<img class="dynamic-image" src="ModGroup_ModName/avatars/head/Elyra.png" />
+```
+
+This resolves to `mods/ModGroup_ModName/avatars/head/Elyra.png`.
 
 ### 2. Image Paths Are Relative
 

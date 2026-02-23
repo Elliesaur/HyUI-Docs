@@ -519,6 +519,14 @@ Dynamic images download a PNG at runtime and assign it to a dynamic image slot.
 <img id="player-head" class="dynamic-image" src="https://hyvatar.io/render/PlayerName" />
 ```
 
+**HYUIML File Path Example (0.9.0+)**
+
+```html
+<img id="npc-head" class="dynamic-image" src="ModGroup_ModName/avatars/head/Elyra.png" />
+```
+
+This resolves to `mods/ModGroup_ModName/avatars/head/Elyra.png`.
+
 **Java Builder Example**
 
 ```java
