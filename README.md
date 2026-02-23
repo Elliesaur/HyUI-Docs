@@ -21,6 +21,15 @@ Features
 * **Images:** Easy asset-backed images, plus runtime-downloaded dynamic images.
 * **Advanced Logic (Escape Hatches):** Access raw `UICommandBuilder` instances at any point for properties not natively covered by the API.
 
+Logging
+
+To show HyUI logging in the Server console, set the `HYUI_LOGGING_LEVEL` environment variable to a standard Java level (e.g., `INFO`, `FINE`, `FINEST`, `SEVERE`).
+This defaults to FINEST, meaning logging is not shown by default in the Server console.
+
+```bash
+HYUI_LOGGING_LEVEL=INFO
+```
+
 Quick Start
 
 {% stepper %}
