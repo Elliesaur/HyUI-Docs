@@ -8,6 +8,7 @@
 * Feature: Add file path support for dynamic images.
 * Feature: ScrollbarStyle can now be used for `.withScrollbarStyle`.
 * Feature: `onClick` helper methods for `ButtonBuilder` and `CustomButtonBuilder`.
+* Developers: Added `HYUI_LOGGING_LEVEL` environment variable to control logging level of HyUI in particular (INFO, SEVERE, FINEST...).
 * Fix: Label Alignment corrected to Start, Center, End.
 * Increase: 25 dynamic images per player on screen at one time.
 
