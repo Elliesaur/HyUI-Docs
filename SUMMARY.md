@@ -4,6 +4,7 @@
 
 * [HyUI](README.md)
 * [Changelog](changelog.md)
+* [API Reference](https://elliesaur.github.io/HyUI/)
 * [Getting Started](getting-started/README.md)
   * [Installation](getting-started/installation.md)
   * [HUD Building](getting-started/hud-building.md)
