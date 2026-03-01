@@ -32,7 +32,7 @@ Now, to open that page, look inside the executeCommand method which already open
 PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());
 if (playerRef != null) {
     // Set up our button for this player specifically.
-    page.getById("exampleBtn", ButtonBuilder.class).ifPresent(button -> {
+    page.editById("exampleBtn", ButtonBuilder.class, button -> {
         button.addEventListener(CustomUIEventBindingType.Activating, event -> {
             commandContext.sendMessage(Message.raw("Button clicked!"));
         });
@@ -41,7 +41,7 @@ if (playerRef != null) {
 }
 ```
 
-We will need to adjust this, let's remove the `getById` method entirely.
+If you need these edits to survive rebuilds, enable `enablePersistentElementEdits(true)` on the page builder.
 
 ```java
 PlayerRef playerRef = store.getComponent(ref, PlayerRef.getComponentType());

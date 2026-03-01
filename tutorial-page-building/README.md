@@ -31,9 +31,10 @@ UI file parsing is **experimental**. APIs may change while it matures.
 {% code title="Example" %}
 ```java
 var pb = PageBuilder.detachedPage()
+    .enablePersistentElementEdits(true)
     .fromUIFile("Pages/ComplexTest.ui");
 
-pb.getById("SaveButton", ButtonBuilder.class).ifPresent((b) -> {
+pb.editById("SaveButton", ButtonBuilder.class, (b) -> {
     b.addEventListener(CustomUIEventBindingType.Activating, (e) ->
         HytaleLogger.forEnclosingClass().atInfo().log(b.toString()));
 });
@@ -206,6 +207,29 @@ PageBuilder.pageForPlayer(playerRef)
     .open(store);
 ```
 {% endcode %}
+
+## Build Lifecycle Callbacks
+
+Use `onBuild(...)` to run logic after the page/hud finishes building. The callback provides a `UIContext` and a boolean `updateOnly` flag (true when the build is an update pass).
+
+{% code title="onBuild Example" %}
+```java
+PageBuilder.pageForPlayer(playerRef)
+    .fromHtml("<p id=\"status\">Loading...</p>")
+    .onBuild((ctx, updateOnly) -> {
+        ctx.getById("status", LabelBuilder.class).ifPresent(label -> {
+            label.withText(updateOnly ? "Updated build" : "Initial build");
+            ctx.updatePage(true);
+        });
+    })
+    .open(store);
+```
+{% endcode %}
+
+If you need an earlier hook, use edit callbacks:
+
+* `editElement(...)` runs before the build is sent to the client.
+* `editElementBefore(...)` / `editElementAfter(...)` on individual builders let you tap into the command stream right before/after an element is built.
 
 ## Complete Implementation Example
 

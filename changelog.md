@@ -2,6 +2,18 @@
 
 <details>
 
+<summary><strong>0.9.1 - 1 Mar 2026</strong></summary>
+
+* Feature: CodeEditor support (builder + HYUIML + UI Files).
+* Feature: Build callback (`onBuilt`) with `UIContext` and `updateOnly` flag.
+* Feature: Persistent builder edits (`editById`) supported across rebuilds.
+* Feature: Allow removal of child with addChild/removeChild.
+
+**Note:** Do not attempt to set language on an editor, it will crash the client: "0 is greater than -1".
+</details>
+
+<details>
+
 <summary><strong>0.9.0 - 24 Feb 2026</strong></summary>
 
 * Feature: UI file parsing (experimental).

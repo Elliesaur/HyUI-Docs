@@ -104,6 +104,7 @@ Yes, we edited three builders in one click. We are unstoppable.
 
 {% hint style="info" %}
 * `ctx.updatePage(true)` rebuilds the whole page client-side. It is the simplest approach for runtime edits, but it is a rebuild, not a surgical patch.
+* If you want these edits to persist across rebuilds, enable `enablePersistentElementEdits(true)` and prefer `editById(...)` when mutating builders.
 * For text inputs, a `ValueChanged` event fires on every change. That is great for sliders, but can be noisy for text fields. Prefer `FocusLost` for those.
 * If you are editing layout or visibility, expect the whole layout to reflow.
 {% endhint %}

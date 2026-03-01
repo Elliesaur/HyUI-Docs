@@ -405,15 +405,17 @@ Your team (and future you) will appreciate it.
 
 ```java
 PageBuilder.pageForPlayer(playerRef)
+    .enablePersistentElementEdits(true)
     .loadHtml("Pages/layout.html")
-    .getById("save-btn", ButtonBuilder.class).ifPresent(btn ->
+    .editById("save-btn", ButtonBuilder.class, btn ->
         btn.withStyle(MyModStyles.primaryButton()))
-    .getById("cancel-btn", ButtonBuilder.class).ifPresent(btn ->
+    .editById("cancel-btn", ButtonBuilder.class, btn ->
         btn.withStyle(MyModStyles.secondaryButton()))
     .open(store);
 ```
 
 HYUIML handles layout. Java handles styling and logic.
+With persistent edits enabled, rebuilds and refreshes keep these changes.
 {% endstep %}
 
 {% step %}

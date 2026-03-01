@@ -57,6 +57,8 @@ builder.getById("my-button");
 builder.getById("HYUUIDmybutton0"); // Wrong!
 ```
 
+Tip: Prefer `editById(...)` when you want chaining or persistent edits across rebuilds.
+
 ## CSS Limitations
 
 ### 1. Limited Property Support

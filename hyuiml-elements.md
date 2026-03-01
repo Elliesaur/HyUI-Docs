@@ -382,6 +382,52 @@ Maps to `TextFieldBuilder.multilineTextField()`.
 <textarea data-hyui-auto-grow="true" data-hyui-max-visible-lines="10"></textarea>
 ```
 
+### `<code-editor>`, `<textarea class="code-editor">`
+
+Maps to `CodeEditorBuilder`.
+
+**Attributes**:
+
+* `value` - Initial text value
+* `placeholder` - Placeholder text
+* `maxlength` - Maximum characters
+* `rows` - Visible rows (maps to max visible lines)
+* `data-hyui-max-visible-lines` - Max visible lines
+* `data-hyui-max-lines` - Max lines (0 = unlimited)
+* `data-hyui-auto-grow` - Enable auto-grow
+* `data-hyui-auto-focus` - Auto focus on mount
+* `data-hyui-auto-select-all` - Auto select all on mount
+* `data-hyui-line-number-width` - Line number column width
+* `data-hyui-line-number-padding` - Line number padding
+* `data-hyui-line-number-text-color` - Line number text color
+* `data-hyui-line-number-background` - Line number background style reference
+* `data-hyui-scrollbar-style` - Scrollbar style reference
+* `data-hyui-placeholder-style` - Placeholder style reference
+* `data-hyui-content-padding` - Content padding (e.g., `(Horizontal:10,Vertical:8)`)
+
+**Example**:
+
+```html
+<code-editor id="script"
+    value="print('Hello')"
+    placeholder="Type code here..."
+    maxlength="2000"
+    rows="8"
+    data-hyui-max-visible-lines="8"
+    data-hyui-max-lines="0"
+    data-hyui-auto-grow="false"
+    data-hyui-auto-focus="true"
+    data-hyui-auto-select-all="true"
+    data-hyui-line-number-width="32"
+    data-hyui-line-number-padding="6"
+    data-hyui-line-number-text-color="#99a1b3"
+    data-hyui-line-number-background="Common.ui InputBoxBackground"
+    data-hyui-scrollbar-style="Common.ui DefaultScrollbarStyle"
+    data-hyui-placeholder-style="Common.ui DefaultInputFieldPlaceholderStyle"
+    data-hyui-content-padding="(Horizontal:10,Vertical:8)">
+</code-editor>
+```
+
 ### `<select>`
 
 Maps to `DropdownBoxBuilder`. Use `<option>` children for entries.
