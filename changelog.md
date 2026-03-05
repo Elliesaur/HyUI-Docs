@@ -2,6 +2,14 @@
 
 <details>
 
+<summary><strong>0.9.2 - 5 Mar 2026</strong></summary>
+
+* Fix: Tooltip styling now correctly applies to a tooltip textspan.
+
+</details>
+
+<details>
+
 <summary><strong>0.9.1 - 1 Mar 2026</strong></summary>
 
 * Feature: CodeEditor support (builder + HYUIML + UI Files).
