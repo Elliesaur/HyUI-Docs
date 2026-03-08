@@ -2,6 +2,16 @@
 
 <details>
 
+<summary><strong>0.9.3 - 8 Mar 2026</strong></summary>
+
+* Fix: HUD names are now unique and prevent conflicts (moved from ms to UUID).
+* Fix: No longer release dynamic images upon dismissing HUD/page if they are cached.
+* Fix: Correctly apply edit persistence callbacks when template runtime is enabled.
+
+</details>
+
+<details>
+
 <summary><strong>0.9.2 - 5 Mar 2026</strong></summary>
 
 * Fix: Tooltip styling now correctly applies to a tooltip textspan.
