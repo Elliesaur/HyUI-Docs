@@ -2,6 +2,14 @@
 
 <details>
 
+<summary><strong>0.9.4 - 9 Mar 2026</strong></summary>
+
+* Feature: Allow persistent edits from UI Context, this will call your editById callback twice (one instantly, one on rebuild).
+
+</details>
+
+<details>
+
 <summary><strong>0.9.3 - 8 Mar 2026</strong></summary>
 
 * Fix: HUD names are now unique and prevent conflicts (moved from ms to UUID).
