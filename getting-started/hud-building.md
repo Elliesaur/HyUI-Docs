@@ -16,7 +16,7 @@ You can use an existing Hytale `.ui` file as the base for your HUD.
 ```java
 HudBuilder.hudForPlayer(playerRef)
     .fromFile("Pages/MyHud.ui")
-    .show(store);
+    .show();
 ```
 {% endcode %}
 
@@ -32,7 +32,7 @@ You can define your HUD using HTML-like syntax.
 ```java
 HudBuilder.hudForPlayer(playerRef)
     .fromHtml("<div style='anchor-top: 10; anchor-left: 10;'><p>Hello World!</p></div>")
-    .show(store);
+    .show();
 ```
 {% endcode %}
 {% endstep %}
@@ -50,7 +50,7 @@ HudBuilder.hudForPlayer(playerRef)
     .addElement(LabelBuilder.label()
         .withText("Manual HUD")
         .withAnchor(new HyUIAnchor().setTop(10).setLeft(10)))
-    .show(store);
+    .show();
 ```
 {% endcode %}
 {% endstep %}
@@ -67,7 +67,7 @@ HudBuilder builder = HudBuilder.detachedHud()
     .fromHtml("<p>Shared HUD</p>");
 
 // Later, show it for a specific player
-builder.show(playerRef, store);
+builder.show();
 ```
 {% endcode %}
 
@@ -97,7 +97,7 @@ It is critical that calls to `.show()` are made on the world thread. If you are 
 world.execute(() -> {
     HudBuilder.hudForPlayer(playerRef)
         .fromHtml("<div>Welcome!</div>")
-        .show(store);
+        .show();
 });
 ```
 {% endcode %}
@@ -116,7 +116,7 @@ HudBuilder.hudForPlayer(playerRef)
             label.withText("Time: " + System.currentTimeMillis());
         });
     })
-    .show(store);
+    .show();
 ```
 {% endcode %}
 
@@ -173,7 +173,7 @@ public void onPlayerReady(PlayerReadyEvent event) {
         
         HudBuilder.detachedHud()
             .fromHtml("<div style='anchor-top: 10; anchor-right: 10;'><p>Welcome!</p></div>")
-            .show(playerRef, store);
+            .show();
     });
 }
 ```
